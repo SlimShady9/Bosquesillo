@@ -1,57 +1,58 @@
 package vista;
 import java.awt.GridLayout;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import modelo.Bosquesillo;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class PanelPantallaJuego extends JPanel{
-	private int dimension_x;
-	private int dimension_y;
-	private JButton[][] matiz_botones;
+	private int dimX;
+	private int dimY;
 	private Bosquesillo b;
-	private Random rd;
-	
+	private JButton botonB;
+	private JButton[][] matriz;
+
 	public PanelPantallaJuego() {
-		rd = new Random();
-		dimension_x = rd.nextInt(9);
-		dimension_y = rd.nextInt(9);
-		b = new Bosquesillo(dimension_x , dimension_y);
-		setLayout(new GridLayout(dimension_x , dimension_y ));
-		matiz_botones = new JButton[dimension_x][dimension_y];
-		inicilizarBotones();
+		dimX = ThreadLocalRandom.current().nextInt(1, 10);
+		dimY = ThreadLocalRandom.current().nextInt(1, 10);
+		b = new Bosquesillo(dimX , dimY);
+		setLayout(new GridLayout(dimX , dimY ));
+		matriz = new JButton[dimX][dimY];
+		inicializarTabla();
 		cargarGrid();
-		}
-		
-	
-	public void inicilizarBotones() {
-		for (int i = 0 ; i < dimension_x; i++) {
-			for (int j = 0 ; j < dimension_y ; j++) {
+	}
+
+
+	public void inicializarTabla() {
+		for (int i = 0 ; i < dimX; i++) {
+			for (int j = 0 ; j < dimY ; j++) {
 				if (b.getPosX() == i && b.getPosY() == j){
-					matiz_botones[i][j] = new JButton(b.cargarImagenes());
+					botonB = new JButton(b.cargarImagenes());
+				}else {
+					matriz[i][j] = new JButton(" ");
 				}
-				else{
-					matiz_botones[i][j] = new JButton("  ");
-				}
-				
 			}
 		}
 	}
 	public void cargarGrid() {
-		for (int i = 0 ; i < dimension_x ; i++) {
-			for (int j = 0 ; j < dimension_y ; j++) {
-				add(matiz_botones[i][j]);
+		for (int i = 0 ; i < dimX ; i++) {
+			for (int j = 0 ; j < dimY ; j++) {
+				if (b.getPosX() == i && b.getPosY() == j){
+					add(botonB);
+				}
+				else {
+					add(matriz[i][j]);
+				}
 			}
 		}
 		validate();
 	}
 
-	public int getDimension_x() {
-		return dimension_x;
+	public int getDimX() {
+		return dimX;
 	}
-	public int getDimension_y() {
-		return dimension_y;
+	public int getDimY() {
+		return dimY;
 	}
 
 }

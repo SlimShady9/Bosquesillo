@@ -1,36 +1,32 @@
 package modelo;
-import java.awt.Image;
-import java.awt.font.NumericShaper.Range;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.ImageIcon;
-import vista.PanelPantallaJuego;
 
 public class Bosquesillo {
 
 	private int[][] posicion;
 	private int posX;
 	private int posY;
-	private String imBosquesillo;
 	private int maxX;
 	private int maxY;
-	private Random rd;
+	private ImageIcon imagen;
 	
 	public Bosquesillo(int x, int y){
-		rd = new Random();
 		maxX = x;
 		maxY= y;
 		posInicial();
 	}
 	public void posInicial(){
-		posX = rd.nextInt(maxX);
- 		posY = rd.nextInt(maxY);
+		posX = ThreadLocalRandom.current().nextInt(0, maxX );
+ 		posY = ThreadLocalRandom.current().nextInt(0, maxY );
 
 		posicion = new int[posX][posY];
 
 	}
 
-	public String cargarImagenes(){
-		return imBosquesillo = "(^･ｪ･^)";
+	public ImageIcon cargarImagenes(){
+		imagen = new ImageIcon("Data/Bosquesillo.jpeg");
+		return imagen;
 	}
 
 	public void actualizar(){
