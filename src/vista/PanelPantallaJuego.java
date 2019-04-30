@@ -21,7 +21,6 @@ public class PanelPantallaJuego extends JPanel{
 		pPrincipal = p;
 		dimX = ThreadLocalRandom.current().nextInt(5, 20);
 		dimY = ThreadLocalRandom.current().nextInt(5, 20);
-		setLayout(new GridLayout(dimX, dimY));
 		b = new Bosquesillo(dimX , dimY);
 		matriz = new JButton[dimX][dimY];
 		inicializarTabla();

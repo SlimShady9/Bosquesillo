@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 
 public class Bosquesillo {
 
-	private boolean[][] posicion;
+	private boolean[][] pos;
 	private int posX;
 	private int posY;
 	private int maxX;
@@ -22,18 +22,27 @@ public class Bosquesillo {
 		moverDerecha = false;
 		maxX = x;
 		maxY= y;
-		posicion = new boolean[maxX][maxY];
+		pos = new boolean[maxX][maxY];
 		posInicial();
 	}
 	public void posInicial(){
 		posX = ThreadLocalRandom.current().nextInt(0, maxX );
  		posY = ThreadLocalRandom.current().nextInt(0, maxY );
- 		for (int i = 0; i < posX ; i++) {
- 			for (int j = 0 ; j < posY; j++) {
- 				
+ 		cargarPosiciones();
+
+	}
+	
+	public void cargarPosiciones() {
+		for (int i = 0; i < maxX ; i++) {
+ 			for (int j = 0 ; j < maxY; j++) {
+ 				if (i == posX && j == posY) {
+ 					pos[i][j] = true;
+ 				}
+ 				else {
+ 					pos [i][j] = false;
+ 				}
  			}
  		}
-
 	}
 
 	public ImageIcon cargarImagenes(){
@@ -43,17 +52,21 @@ public class Bosquesillo {
 
 	public void actualizar(){
 		if (moverArriba) {
-			posY -= 1;
+			posY -= 25;
+			cargarPosiciones();
 			
 		}
 		if (moverAbajo) {
-			posY += 1;
+			posY += 25;
+			cargarPosiciones();
 		}
 		if (moverIzquierda) {
-			posX -= 1;
+			posX -= 25;
+			cargarPosiciones();
 		}
 		if (moverDerecha) {
-			posX += 1;
+			posX += 25;
+			cargarPosiciones();
 		}
 
 	}
