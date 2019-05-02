@@ -2,58 +2,41 @@ package vista;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.concurrent.ThreadLocalRandom;
 import modelo.Bosquesillo;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class PanelPantallaJuego extends JPanel{
+import controlador.Controlador;
+
+public class PanelPantallaJuego extends JPanel implements KeyListener{
 	private int dimX;
 	private int dimY;
-	private Bosquesillo b;
 	private JButton botonB;
-	private JButton[][] matriz;
-	private PanelPrincipal pPrincipal;
-
-	public PanelPantallaJuego(PanelPrincipal p) {
+	private Controlador c;
+	public PanelPantallaJuego(Controlador co) {
 		
-		pPrincipal = p;
-		dimX = ThreadLocalRandom.current().nextInt(5, 20);
-		dimY = ThreadLocalRandom.current().nextInt(5, 20);
-		b = new Bosquesillo(dimX , dimY);
-		matriz = new JButton[dimX][dimY];
+		setLayout(null);
+		c = co;
 		inicializarTabla();
-		cargarGrid();
+		actualizarPosicion();
 	}
 
 
 	public void inicializarTabla() {
 		
-		for (int i = 0 ; i < dimX; i++) {
-			for (int j = 0 ; j < dimY ; j++) {
-				if (b.getPosX() == i && b.getPosY() == j){
-					botonB = new JButton(b.cargarImagenes());
-					botonB.addKeyListener(pPrincipal);
-				}else {
-					matriz[i][j] = new JButton(" ");
-				}
-			}
-		}
-		
+		botonB = c.asignarBosquesillo();
+		botonB.addKeyListener(this);
+		add(botonB);
 	}
-	public void cargarGrid() {
-		for (int i = 0 ; i < dimX ; i++) {
-			for (int j = 0 ; j < dimY ; j++) {
-				if (b.getPosX() == i && b.getPosY() == j){
-					add(botonB);
-				}
-				else {
-					add(matriz[i][j]);
-				}
-			}
-		}
-		validate();
+	
+	public void actualizarPosicion() {
+		int x = c.getPosX();
+		int y = c.getPosY();
+		botonB.setLocation(x, y);
 	}
 
 	public int getDimX() {
@@ -64,13 +47,51 @@ public class PanelPantallaJuego extends JPanel{
 	}
 
 
-	public Bosquesillo getB() {
-		return b;
-	}
-
 
 	public JButton getBotonB() {
 		return botonB;
+	}
+
+
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		int key = arg0.getKeyCode();
+		if (key == KeyEvent.VK_UP) {
+			c.moverArriba();
+			actualizarPosicion();
+			
+		}
+		if (key == KeyEvent.VK_DOWN) {
+			c.moverAbajo();
+			actualizarPosicion();
+			
+		}
+		if (key == KeyEvent.VK_LEFT) {
+			c.moverIzquierda();
+			actualizarPosicion();
+			
+		}
+		if (key == KeyEvent.VK_RIGHT) {
+			c.moverDerecha();
+			actualizarPosicion();
+			
+
+		}
+	}
+
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

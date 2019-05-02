@@ -8,67 +8,24 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class PanelPrincipal extends JFrame implements KeyListener {
+import controlador.Controlador;
+
+public class PanelPrincipal extends JFrame {
 	
 	
 	private PanelPantallaJuego pJ;
+	private Controlador c;
 	
-	PanelPrincipal(){
+	public PanelPrincipal(Controlador co, int dimX, int dimY){
 		super("Juego");
 		setLayout(new BorderLayout());
-		pJ = new PanelPantallaJuego(this);
+		c = co;
+		pJ = new PanelPantallaJuego(c);
 		add(pJ, BorderLayout.CENTER);
 		add(new JButton("Hola"), BorderLayout.SOUTH);
-		setSize(500, 500);
+		setSize(dimX, dimY);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 	}
-	public static void main(String[] args) {
-		PanelPrincipal v = new PanelPrincipal();
-	}
-	@Override
-	public void keyPressed(KeyEvent arg0) {
-		int key = arg0.getKeyCode();
-		if (key == KeyEvent.VK_UP) {
-			pJ.getB().setMoverArriba(true);
-			pJ.getB().actualizar();
-			pJ.getB().setMoverArriba(false);
-			
-			pJ.getBotonB().setLocation(pJ.getB().getPosX(), pJ.getB().getPosY());
-		}
-		if (key == KeyEvent.VK_DOWN) {
-			pJ.getB().setMoverAbajo(true);
-			pJ.getB().actualizar();
-			pJ.getB().setMoverAbajo(false);
-			
-			pJ.getBotonB().setLocation(pJ.getB().getPosX(), pJ.getB().getPosY());
-		}
-		if (key == KeyEvent.VK_LEFT) {
-			pJ.getB().setMoverIzquierda(true);
-			pJ.getB().actualizar();
-			pJ.getB().setMoverIzquierda(false);
-			
-			pJ.getBotonB().setLocation(pJ.getB().getPosX(), pJ.getB().getPosY());
-		}
-		if (key == KeyEvent.VK_RIGHT) {
-			pJ.getB().setMoverDerecha(true);
-			pJ.getB().actualizar();
-			pJ.getB().setMoverDerecha(false);
-			
-			pJ.getBotonB().setLocation(pJ.getB().getPosX(), pJ.getB().getPosY());
-		}
-		
-	}
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

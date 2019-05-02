@@ -4,7 +4,6 @@ import javax.swing.ImageIcon;
 
 public class Bosquesillo {
 
-	private boolean[][] pos;
 	private int posX;
 	private int posY;
 	private int maxX;
@@ -22,27 +21,27 @@ public class Bosquesillo {
 		moverDerecha = false;
 		maxX = x;
 		maxY= y;
-		pos = new boolean[maxX][maxY];
 		posInicial();
 	}
 	public void posInicial(){
 		posX = ThreadLocalRandom.current().nextInt(0, maxX );
  		posY = ThreadLocalRandom.current().nextInt(0, maxY );
- 		cargarPosiciones();
 
 	}
 	
-	public void cargarPosiciones() {
-		for (int i = 0; i < maxX ; i++) {
- 			for (int j = 0 ; j < maxY; j++) {
- 				if (i == posX && j == posY) {
- 					pos[i][j] = true;
- 				}
- 				else {
- 					pos [i][j] = false;
- 				}
- 			}
- 		}
+	public void verificarMuros() {
+		if (posX  > maxX ) {
+			System.out.println("x " + posX);
+		}
+		if (posX + 30 < 0) {
+			System.out.println("x "+ posX);
+		}
+		if (posY > maxY) {
+			System.out.println("y "+ posY);
+		}
+		if (posY - 30 < 0) {
+			System.out.println("y "+posY);
+		}
 	}
 
 	public ImageIcon cargarImagenes(){
@@ -52,21 +51,17 @@ public class Bosquesillo {
 
 	public void actualizar(){
 		if (moverArriba) {
-			posY -= 25;
-			cargarPosiciones();
+			posY -= 30;
 			
 		}
 		if (moverAbajo) {
-			posY += 25;
-			cargarPosiciones();
+			posY += 30;
 		}
 		if (moverIzquierda) {
-			posX -= 25;
-			cargarPosiciones();
+			posX -= 30;
 		}
 		if (moverDerecha) {
-			posX += 25;
-			cargarPosiciones();
+			posX += 30;
 		}
 
 	}
