@@ -1,11 +1,6 @@
 package vista;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.concurrent.ThreadLocalRandom;
-import modelo.Bosquesillo;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,37 +8,45 @@ import javax.swing.JPanel;
 import controlador.Controlador;
 
 public class PanelPantallaJuego extends JPanel implements KeyListener{
-	private int dimX;
-	private int dimY;
+
 	private JButton botonB;
+	private JLabel tablero[][];
 	private Controlador c;
 	public PanelPantallaJuego(Controlador co) {
 		
 		setLayout(null);
 		c = co;
-		inicializarTabla();
+		iniciarObjetos();
 		actualizarPosicion();
 	}
 
 
-	public void inicializarTabla() {
-		
+	public void iniciarObjetos() {
+		cargarBosquesillo();
+		cargarTabla();
+	}
+	public void cargarBosquesillo() {
 		botonB = c.asignarBosquesillo();
 		botonB.addKeyListener(this);
 		add(botonB);
+	}
+	
+	public void cargarTabla() {
+		tablero = c.asignarTablero();
+		int x = c.getDimX() / 30;
+		int y = c.getDimY() / 30;
+		for (int i = 0; i < x ; i++) {
+			for (int j = 0 ; j < y; j++) {
+				add(tablero[i][j]);
+			}
+		}
+		validate();
 	}
 	
 	public void actualizarPosicion() {
 		int x = c.getPosX();
 		int y = c.getPosY();
 		botonB.setLocation(x, y);
-	}
-
-	public int getDimX() {
-		return dimX;
-	}
-	public int getDimY() {
-		return dimY;
 	}
 
 

@@ -24,23 +24,30 @@ public class Bosquesillo {
 		posInicial();
 	}
 	public void posInicial(){
-		posX = ThreadLocalRandom.current().nextInt(0, maxX );
- 		posY = ThreadLocalRandom.current().nextInt(0, maxY );
+		posX = ThreadLocalRandom.current().nextInt(0, maxX - 30 );
+ 		posY = ThreadLocalRandom.current().nextInt(0, maxY - 30 );
+ 		while (posX % 30 != 0) {
+ 			posX ++;
+ 		}
+ 		while (posY % 30 != 0) {
+ 			posY++;
+ 		}
+ 		System.out.println("PosX " + posX + "PosY " + posY);
 
 	}
 	
 	public void verificarMuros() {
-		if (posX  > maxX ) {
-			System.out.println("x " + posX);
+		if (posX + 30  > maxX ) {
+			posX -= 30;
 		}
-		if (posX + 30 < 0) {
-			System.out.println("x "+ posX);
+		if (posX  < 0) {
+			posX +=30;
 		}
-		if (posY > maxY) {
-			System.out.println("y "+ posY);
+		if (posY + 70> maxY) {
+			posY -= 30;
 		}
-		if (posY - 30 < 0) {
-			System.out.println("y "+posY);
+		if (posY < 0) {
+			posY += 30;
 		}
 	}
 
