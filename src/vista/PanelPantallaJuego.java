@@ -10,6 +10,8 @@ import controlador.Controlador;
 public class PanelPantallaJuego extends JPanel implements KeyListener{
 
 	private JButton botonB;
+	private JLabel botonML;
+	private JLabel botonThor;
 	private JLabel tablero[][];
 	private Controlador c;
 	public PanelPantallaJuego(Controlador co) {
@@ -17,13 +19,20 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 		setLayout(null);
 		c = co;
 		iniciarObjetos();
-		actualizarPosicion();
+		
 	}
 
 
 	public void iniciarObjetos() {
 		cargarBosquesillo();
+		cagarMonstruo();
+		cargarThor();
 		cargarTabla();
+	}
+	
+	public void cargarThor (){
+		botonThor = c.asignarThor();
+		add(botonThor);
 	}
 	public void cargarBosquesillo() {
 		botonB = c.asignarBosquesillo();
@@ -31,6 +40,10 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 		add(botonB);
 	}
 	
+	public void cagarMonstruo(){
+		botonML = c.asignarMonstruo();
+		add(botonML);
+	}
 	public void cargarTabla() {
 		tablero = c.asignarTablero();
 		int x = c.getDimX() / 30;
@@ -43,12 +56,22 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 		validate();
 	}
 	
-	public void actualizarPosicion() {
-		int x = c.getPosX();
-		int y = c.getPosY();
+	public void actualizarPosicionB() {
+		int x = c.getPosXBos();
+		int y = c.getPosYBos();
 		botonB.setLocation(x, y);
 	}
-
+	
+	public void actualizarPosicionML(){
+		int x = c.getPosXML();
+		int y = c.getPosYML();
+		botonML.setLocation(x, y);
+	}
+	public void actualizarThor(){
+		int x = c.getPosXThor();
+		int y = c.getPosYThor();
+		botonThor.setLocation(x, y);
+	}
 
 
 	public JButton getBotonB() {
@@ -62,23 +85,28 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 		int key = arg0.getKeyCode();
 		if (key == KeyEvent.VK_UP) {
 			c.moverArriba();
-			actualizarPosicion();
+			actualizarPosicionB();
+			actualizarPosicionML();
+			actualizarThor();
 			
 		}
 		if (key == KeyEvent.VK_DOWN) {
 			c.moverAbajo();
-			actualizarPosicion();
-			
+			actualizarPosicionB();
+			actualizarPosicionML();
+			actualizarThor();
 		}
 		if (key == KeyEvent.VK_LEFT) {
 			c.moverIzquierda();
-			actualizarPosicion();
-			
+			actualizarPosicionB();
+			actualizarPosicionML();
+			actualizarThor();
 		}
 		if (key == KeyEvent.VK_RIGHT) {
 			c.moverDerecha();
-			actualizarPosicion();
-			
+			actualizarPosicionB();
+			actualizarPosicionML();
+			actualizarThor();
 
 		}
 	}

@@ -32,7 +32,6 @@ public class Bosquesillo {
  		while (posY % 30 != 0) {
  			posY++;
  		}
- 		System.out.println("PosX " + posX + "PosY " + posY);
 
 	}
 	
