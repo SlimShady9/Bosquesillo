@@ -10,17 +10,17 @@ import controlador.Controlador;
 public class PanelPantallaJuego extends JPanel implements KeyListener{
 
 	private JButton botonB;
-	private JLabel botonML;
-	private JLabel botonThor;
-	private JLabel Trump[];
+	private JLabel[] mLetal;
+	private JLabel thor[];
+	private JLabel trump[];
 	private JLabel tablero[][];
 	private Controlador c;
 	public PanelPantallaJuego(Controlador co) {
-		
+
 		setLayout(null);
 		c = co;
 		iniciarObjetos();
-		
+
 	}
 
 
@@ -31,28 +31,36 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 		cargarTrump();
 		cargarTabla();
 	}
-	
+
 	private void cargarTrump() {
-		Trump = new JLabel[5];
+		trump = new JLabel[5];
 		JLabel[] eo = c.asignarTrumps();
-		for (int i = 0 ; i < Trump.length ; i++) {
-			Trump[i] = eo[i];
-			add(Trump[i]);
+		for (int i = 0 ; i < trump.length ; i++) {
+			trump[i] = eo[i];
+			add(trump[i]);
 		}
 	}
 	public void cargarThor (){
-		botonThor = c.asignarThor();
-		add(botonThor);
+		thor = new JLabel[5];
+		JLabel[] eo = c.asignarThor();
+		for (int i = 0 ; i < thor.length ; i++) {
+			thor[i] = eo[i];
+			add(thor[i]);
+		}
 	}
 	public void cargarBosquesillo() {
 		botonB = c.asignarBosquesillo();
 		botonB.addKeyListener(this);
 		add(botonB);
 	}
-	
+
 	public void cagarMonstruo(){
-		botonML = c.asignarMonstruo();
-		add(botonML);
+		mLetal = new JLabel[5];
+		JLabel[] eo = c.asignarMonstuoL();
+		for (int i = 0; i < mLetal.length; i++) {
+			mLetal[i] = eo[i];
+			add(mLetal[i]);
+		}
 	}
 	public void cargarTabla() {
 		tablero = c.asignarTablero();
@@ -65,22 +73,20 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 		}
 		validate();
 	}
-	
-	public void actualizarPosicionB() {
-		int x = c.getPosXBos();
-		int y = c.getPosYBos();
-		botonB.setLocation(x, y);
+
+	public void actualizarPBosquesillo() {
+		botonB.setLocation(c.getBosque());
 	}
-	
-	public void actualizarPosicionML(){
-		int x = c.getPosXML();
-		int y = c.getPosYML();
-		botonML.setLocation(x, y);
+
+	public void actualizarPMLetales(){
+		for (int i = 0 ; i < mLetal.length ; i++) {
+			mLetal[i].setLocation(c.getMLetal(i));
+		}
 	}
-	public void actualizarThor(){
-		int x = c.getPosXThor();
-		int y = c.getPosYThor();
-		botonThor.setLocation(x, y);
+	public void actualizarPThores(){
+		for (int i = 0 ; i < thor.length ; i++) {
+			thor[i].setLocation(c.getThor(i));
+		}
 	}
 
 
@@ -95,28 +101,28 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 		int key = arg0.getKeyCode();
 		if (key == KeyEvent.VK_UP) {
 			c.moverArriba();
-			actualizarPosicionB();
-			actualizarPosicionML();
-			actualizarThor();
-			
+			actualizarPBosquesillo();
+			actualizarPMLetales();
+			actualizarPThores();
+
 		}
 		if (key == KeyEvent.VK_DOWN) {
 			c.moverAbajo();
-			actualizarPosicionB();
-			actualizarPosicionML();
-			actualizarThor();
+			actualizarPBosquesillo();
+			actualizarPMLetales();
+			actualizarPThores();
 		}
 		if (key == KeyEvent.VK_LEFT) {
 			c.moverIzquierda();
-			actualizarPosicionB();
-			actualizarPosicionML();
-			actualizarThor();
+			actualizarPBosquesillo();
+			actualizarPMLetales();
+			actualizarPThores();
 		}
 		if (key == KeyEvent.VK_RIGHT) {
 			c.moverDerecha();
-			actualizarPosicionB();
-			actualizarPosicionML();
-			actualizarThor();
+			actualizarPBosquesillo();
+			actualizarPMLetales();
+			actualizarPThores();
 
 		}
 	}
@@ -125,17 +131,17 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
-	
+
 
 }

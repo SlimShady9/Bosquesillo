@@ -1,14 +1,13 @@
 package modelo;
+import java.awt.Point;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.ImageIcon;
 
 public class MonstruoLetal {
 	
 	private ImageIcon imagen;
-	private int posX;
-	private int posY;
-	private int maxX;
-	private int maxY;
+	private Point ubicacion;
+	private int maxX, maxY;
 	private boolean moverse;
 	
 	public MonstruoLetal(int x, int y){
@@ -19,14 +18,15 @@ public class MonstruoLetal {
 	}
 	
 	public void iniciarPosicion(){
-		posX = ThreadLocalRandom.current().nextInt(0 , maxX - 30);
-		posY = ThreadLocalRandom.current().nextInt(0 , maxY - 60);
+		int posX = ThreadLocalRandom.current().nextInt(0 , maxX - 30);
+		int posY = ThreadLocalRandom.current().nextInt(0 , maxY - 60);
 		while (posX % 30 != 0){
 			posX++;
 		}
 		while (posY % 30 != 0){
 			posY++;
 		}
+		ubicacion = new Point(posX, posY);
 	}
 	public ImageIcon cargarImagen(){
 		imagen = new ImageIcon("Data/MonstruoLetal.png");
@@ -34,48 +34,55 @@ public class MonstruoLetal {
 	}
 	
 	public void moverse(){
+		int x = 30;
+		int y = 30;
 		if (moverse){
 			int direccion = ThreadLocalRandom.current().nextInt(0, 4);
 			if (direccion == 0){
-				posY -= 30;
+				y = (int) (ubicacion.getY() - y); 
+				ubicacion.setLocation(ubicacion.getX(), y);
 			}
 			if (direccion == 1){
-				posY += 30;
+				y = (int) (ubicacion.getY() + y);
+				ubicacion.setLocation(ubicacion.getX(), y);
 			}
 			if (direccion == 2){
-				posX += 30;
+				x = (int) (ubicacion.getX() + x);
+				ubicacion.setLocation(x, ubicacion.getY());
 			}
 			if (direccion == 3){
-				posX -= 30;
+				x = (int) (ubicacion.getX() - x);
+				ubicacion.setLocation(x, ubicacion.getY());
 			}
 		}
-		
 	}
 	public void verificarMuros() {
-		if (posX + 30  > maxX ) {
-			posX -= 30;
+		int x = 30;
+		int y = 30;
+		if (ubicacion.getX() + 30  > maxX ) {
+			x = (int) (ubicacion.getX() - x);
+			ubicacion.setLocation(x, ubicacion.getY());
 		}
-		if (posX  < 0) {
-			posX +=30;
+		if (ubicacion.getX() < 0) {
+			x = (int) (ubicacion.getX() + x);
+			ubicacion.setLocation(x, ubicacion.getY());
 		}
-		if (posY + 70> maxY) {
-			posY -= 30;
+		if (ubicacion.getY() + 70> maxY) {
+			y = (int) (ubicacion.getY() - y); 
+			ubicacion.setLocation(ubicacion.getX(), y);
 		}
-		if (posY < 0) {
-			posY += 30;
+		if (ubicacion.getY() < 0) {
+			y = (int) (ubicacion.getY() + y);
+			ubicacion.setLocation(ubicacion.getX(), y);
 		}
-	}
-
-	public int getPosX() {
-		return posX;
-	}
-
-	public int getPosY() {
-		return posY;
 	}
 
 	public boolean isMoverse() {
 		return moverse;
+	}
+	
+	public Point getUbicacion() {
+		return ubicacion;
 	}
 
 	public void setMoverse(boolean moverse) {

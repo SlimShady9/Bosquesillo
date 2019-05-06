@@ -1,4 +1,5 @@
 package controlador;
+import java.awt.Point;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -49,38 +50,34 @@ public class Controlador{
 	}
 	public JButton asignarBosquesillo () {
 		ImageIcon imagenB = b.cargarImagenes();
-		int posX = b.getPosX();
-		int posY = b.getPosY();
 		JButton r = new JButton(imagenB);
-		r.setBounds(posX, posY, 30, 30);
+		r.setBounds((int) b.getUbicacion().getX(), (int) b.getUbicacion().getY(), 30, 30);
 		return r;
 	}
 	public JLabel[] asignarThor(){
 		ImageIcon imagenThor;
-		int posX ;
-		int posY ;
+		int posX, posY;
 		JLabel[] r = new JLabel[5];
 		for (int i = 0 ; i < r.length ; i++) {
 			thor[i] = new Tormentoso(dimX,dimY);
 			imagenThor = thor[i].cargarImagen();
 			r[i] = new JLabel(imagenThor);
-			posX = thor[i].getPosX();
-			posY = thor[i].getPosY();
+			posX = (int) thor[i].getUbicacion().getX();
+			posY = (int) thor[i].getUbicacion().getY();
 			r[i].setBounds(posX, posY, 30, 30);
 		}
 		return r;
 		}
-	public JLabel[] asignarMonstruo(){
+	public JLabel[] asignarMonstuoL(){
 		ImageIcon imagenML;
-		int posX ;
-		int posY ;
+		int posX, posY;
 		JLabel[] r = new JLabel[5];
 		for (int i = 0 ; i < r.length ; i++) {
 			mL[i] = new MonstruoLetal(dimX,dimY);
 			imagenML = mL[i].cargarImagen();
 			r[i] = new JLabel(imagenML);
-			posX = mL[i].getPosX();
-			posY = mL[i].getPosY();
+			posX = (int) mL[i].getUbicacion().getX();
+			posY = (int) mL[i].getUbicacion().getY();
 			r[i].setBounds(posX, posY, 30, 30);
 		}
 		return r;
@@ -94,8 +91,8 @@ public class Controlador{
 			trump[i] = new MuroDeTrump(dimX,dimY);
 			imagenTrump = trump[i].cargarImagen();
 			r[i] = new JLabel(imagenTrump);
-			posX = trump[i].getPosX();
-			posY = trump[i].getPosY();
+			posX = (int)trump[i].getUbicacion().getX();
+			posY = (int)trump[i].getUbicacion().getY();
 			r[i].setBounds(posX, posY, 30, 30);
 		}
 		return r;
@@ -122,25 +119,18 @@ public class Controlador{
 		return casillas;
 	}
 	
-	public int getPosXBos() {
-		return b.getPosX();
-	}
-	public int getPosYBos() {
-		return b.getPosY();
-	}
-	public int getPosXML(){
-		return mL.getPosX();
-	}
-	public int getPosYML(){
-		return mL.getPosY();
-	}
-	public int getPosXThor(){
-		return thor.getPosX();
+	public Point getBosque() {
+		return b.getUbicacion();
 	}
 
-	public int getPosYThor(){
-		return thor.getPosY();
+	public Point getMLetal(int indice){
+		return mL[indice].getUbicacion();
 	}
+
+	public Point getThor(int indice){
+		return thor[indice].getUbicacion();
+	}
+
 	public int getDimX() {
 		return dimX;
 	}
@@ -148,58 +138,51 @@ public class Controlador{
 	public int getDimY() {
 		return dimY;
 	}
+	
+	public void moverThors() {
+		for (int i = 0 ; i < thor.length ; i++) {
+			thor[i].setMoverse(true);
+			thor[i].moverse();
+			thor[i].setMoverse(false);
+			thor[i].verificarMuros();
+		}
+	}
+	public void moverLetales() {
+		for (int i = 0 ; i < mL.length ; i++) {
+			mL[i].setMoverse(true);
+			mL[i].moverse();
+			mL[i].setMoverse(false);
+			mL[i].verificarMuros();
+		}
+	}
 
 	public void moverArriba() {
-		thor.setMoverse(true);
-		thor.moverse();
-		thor.setMoverse(false);
-		thor.verificarMuros();
-		mL.setMoverse(true);
-		mL.moverse();
-		mL.setMoverse(false);
-		mL.verificarMuros();
+		moverThors();
+		moverLetales();
 		b.setMoverArriba(true);
 		b.actualizar();
 		b.setMoverArriba(false);
 		b.verificarMuros();
 	}
 	public void moverAbajo() {
-		thor.setMoverse(true);
-		thor.moverse();
-		thor.setMoverse(false);
-		thor.verificarMuros();
-		mL.setMoverse(true);
-		mL.moverse();
-		mL.setMoverse(false);
-		mL.verificarMuros();
+		moverThors();
+		moverLetales();
 		b.setMoverAbajo(true);
 		b.actualizar();
 		b.setMoverAbajo(false);
 		b.verificarMuros();
 	}
 	public void moverIzquierda() {
-		thor.setMoverse(true);
-		thor.moverse();
-		thor.setMoverse(false);
-		thor.verificarMuros();
-		mL.setMoverse(true);
-		mL.moverse();
-		mL.setMoverse(false);
-		mL.verificarMuros();
+		moverThors();
+		moverLetales();
 		b.setMoverIzquierda(true);
 		b.actualizar();
 		b.setMoverIzquierda(false);
 		b.verificarMuros();
 	}
 	public void moverDerecha() {
-		thor.setMoverse(true);
-		thor.moverse();
-		thor.setMoverse(false);
-		thor.verificarMuros();
-		mL.setMoverse(true);
-		mL.moverse();
-		mL.setMoverse(false);
-		mL.verificarMuros();
+		moverThors();
+		moverLetales();
 		b.setMoverDerecha(true);
 		b.actualizar();
 		b.setMoverDerecha(false);

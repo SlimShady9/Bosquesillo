@@ -1,18 +1,14 @@
 package modelo;
+import java.awt.Point;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.ImageIcon;
 
 public class Bosquesillo {
 
-	private int posX;
-	private int posY;
-	private int maxX;
-	private int maxY;
+	private int maxX, maxY;
+	private Point ubicacion;
 	private ImageIcon imagen;
-	private boolean moverArriba;
-	private boolean moverAbajo;
-	private boolean moverIzquierda;
-	private boolean moverDerecha;
+	private boolean moverArriba, moverAbajo, moverIzquierda, moverDerecha;
 	
 	public Bosquesillo(int x, int y){
 		moverArriba = false;
@@ -24,29 +20,36 @@ public class Bosquesillo {
 		posInicial();
 	}
 	public void posInicial(){
-		posX = ThreadLocalRandom.current().nextInt(0, maxX - 30 );
- 		posY = ThreadLocalRandom.current().nextInt(0, maxY - 30 );
+		int posX = ThreadLocalRandom.current().nextInt(0, maxX - 30 );
+ 		int posY = ThreadLocalRandom.current().nextInt(0, maxY - 30 );
  		while (posX % 30 != 0) {
  			posX ++;
  		}
  		while (posY % 30 != 0) {
  			posY++;
  		}
+ 		ubicacion = new Point(posX, posY);
 
 	}
 	
 	public void verificarMuros() {
-		if (posX + 30  > maxX ) {
-			posX -= 30;
+		int x = 30;
+		int y = 30;
+		if (ubicacion.getX() + 30  > maxX ) {
+			x = (int) (ubicacion.getX() - x);
+			ubicacion.setLocation(x, ubicacion.getY());
 		}
-		if (posX  < 0) {
-			posX +=30;
+		if (ubicacion.getX()  < 0) {
+			x = (int) ubicacion.getX() + x;
+			ubicacion.setLocation(x, ubicacion.getY());
 		}
-		if (posY + 70> maxY) {
-			posY -= 30;
+		if (ubicacion.getY() + 70> maxY) {
+			y = (int) (ubicacion.getY() - y); 
+			ubicacion.setLocation(ubicacion.getX(), y);
 		}
-		if (posY < 0) {
-			posY += 30;
+		if (ubicacion.getY() < 0) {
+			y = (int) (ubicacion.getY() + y);
+			ubicacion.setLocation(ubicacion.getX(), y);
 		}
 	}
 
@@ -56,28 +59,29 @@ public class Bosquesillo {
 	}
 
 	public void actualizar(){
+		int x = 30;
+		int y = 30;
 		if (moverArriba) {
-			posY -= 30;
-			
+			y = (int) (ubicacion.getY() - y);
+			ubicacion.setLocation(ubicacion.getX(), y);
 		}
 		if (moverAbajo) {
-			posY += 30;
+			y = (int) (ubicacion.getY() + y); 
+			ubicacion.setLocation(ubicacion.getX(), y);
 		}
 		if (moverIzquierda) {
-			posX -= 30;
+			x = (int) (ubicacion.getX() - x);
+			ubicacion.setLocation(x, ubicacion.getY());
 		}
 		if (moverDerecha) {
-			posX += 30;
+			x = (int) ubicacion.getX() + x;
+			ubicacion.setLocation(x, ubicacion.getY());
 		}
 
 	}
 	
-	public int getPosX() {
-		return posX;
-	}
-	
-	public int getPosY() {
-		return posY;
+	public Point getUbicacion() {
+		return ubicacion;
 	}
 	public void setMoverArriba(boolean moverArriba) {
 		this.moverArriba = moverArriba;
