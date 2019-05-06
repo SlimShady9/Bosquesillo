@@ -12,6 +12,7 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 	private JButton botonB;
 	private JLabel botonML;
 	private JLabel botonThor;
+	private JLabel Trump[];
 	private JLabel tablero[][];
 	private Controlador c;
 	public PanelPantallaJuego(Controlador co) {
@@ -27,9 +28,18 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 		cargarBosquesillo();
 		cagarMonstruo();
 		cargarThor();
+		cargarTrump();
 		cargarTabla();
 	}
 	
+	private void cargarTrump() {
+		Trump = new JLabel[5];
+		JLabel[] eo = c.asignarTrumps();
+		for (int i = 0 ; i < Trump.length ; i++) {
+			Trump[i] = eo[i];
+			add(Trump[i]);
+		}
+	}
 	public void cargarThor (){
 		botonThor = c.asignarThor();
 		add(botonThor);

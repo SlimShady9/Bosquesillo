@@ -10,8 +10,9 @@ public class Controlador{
 	private Bosquesillo b;
 	private PanelPrincipal p;
 	private Tablero t;
-	private MonstruoLetal mL;
-	private Tormentoso thor;
+	private MonstruoLetal[] mL;
+	private Tormentoso[] thor;
+	private MuroDeTrump[] trump;
 	private int dimX, dimY;
 	public Controlador() {
 		dimX = ThreadLocalRandom.current().nextInt(300, 500);
@@ -26,17 +27,22 @@ public class Controlador{
 		iniciarMostruoL();
 		iniciarTormentoso();
 		iniciarTablero();
+		iniciarMuroDeTrump();
 		p = new PanelPrincipal(this, dimX, dimY);
 	}
 	
+	private void iniciarMuroDeTrump() {
+		trump = new MuroDeTrump[5];
+	}
+
 	public void iniciarBosquesillo () {
 		b = new Bosquesillo(dimX, dimY);
 	}
 	public void iniciarTormentoso(){
-		thor = new Tormentoso(dimX, dimY);
+		thor = new Tormentoso[5];
 	}
 	public void iniciarMostruoL(){
-		mL = new MonstruoLetal(dimX, dimY);
+		mL = new MonstruoLetal[5];
 	}
 	public void iniciarTablero() {
 		t = new Tablero();
@@ -49,22 +55,52 @@ public class Controlador{
 		r.setBounds(posX, posY, 30, 30);
 		return r;
 	}
-	public JLabel asignarThor(){
-		ImageIcon imagenThor = thor.cargarImagen();
-		int posX = thor.getPosX();
-		int posY = thor.getPosY();
-		JLabel r = new JLabel(imagenThor);
-		r.setBounds(posX, posY, 30, 30);
+	public JLabel[] asignarThor(){
+		ImageIcon imagenThor;
+		int posX ;
+		int posY ;
+		JLabel[] r = new JLabel[5];
+		for (int i = 0 ; i < r.length ; i++) {
+			thor[i] = new Tormentoso(dimX,dimY);
+			imagenThor = thor[i].cargarImagen();
+			r[i] = new JLabel(imagenThor);
+			posX = thor[i].getPosX();
+			posY = thor[i].getPosY();
+			r[i].setBounds(posX, posY, 30, 30);
+		}
+		return r;
+		}
+	public JLabel[] asignarMonstruo(){
+		ImageIcon imagenML;
+		int posX ;
+		int posY ;
+		JLabel[] r = new JLabel[5];
+		for (int i = 0 ; i < r.length ; i++) {
+			mL[i] = new MonstruoLetal(dimX,dimY);
+			imagenML = mL[i].cargarImagen();
+			r[i] = new JLabel(imagenML);
+			posX = mL[i].getPosX();
+			posY = mL[i].getPosY();
+			r[i].setBounds(posX, posY, 30, 30);
+		}
 		return r;
 	}
-	public JLabel asignarMonstruo(){
-		ImageIcon imagenML = mL.cargarImagen();
-		int posX = mL.getPosX();
-		int posY = mL.getPosY();
-		JLabel r = new JLabel(imagenML);
-		r.setBounds(posX, posY, 30, 30);
+	public JLabel[] asignarTrumps(){
+		ImageIcon imagenTrump;
+		int posX ;
+		int posY ;
+		JLabel[] r = new JLabel[5];
+		for (int i = 0 ; i < r.length ; i++) {
+			trump[i] = new MuroDeTrump(dimX,dimY);
+			imagenTrump = trump[i].cargarImagen();
+			r[i] = new JLabel(imagenTrump);
+			posX = trump[i].getPosX();
+			posY = trump[i].getPosY();
+			r[i].setBounds(posX, posY, 30, 30);
+		}
 		return r;
-	}
+	}	
+		
 	public JLabel[][] asignarTablero() {
 		ImageIcon imagenA = t.cargarImagenA();
 		ImageIcon imagenB = t.cargarImagenB();
