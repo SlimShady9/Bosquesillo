@@ -31,7 +31,7 @@ public class Tormentoso {
 		ubicacion = new Point(posX, posY);
 	}
 	public ImageIcon cargarImagen(){
-		imagen = new ImageIcon("Data/Tormentoso.png");
+		imagen = new ImageIcon("Data/Thor.jpeg");
 		return imagen;
 	}
 	

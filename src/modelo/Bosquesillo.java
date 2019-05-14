@@ -43,7 +43,7 @@ public class Bosquesillo {
 			x = (int) ubicacion.getX() + x;
 			ubicacion.setLocation(x, ubicacion.getY());
 		}
-		if (ubicacion.getY() + 70> maxY) {
+		if (ubicacion.getY() + 60> maxY) {
 			y = (int) (ubicacion.getY() - y); 
 			ubicacion.setLocation(ubicacion.getX(), y);
 		}
@@ -64,18 +64,22 @@ public class Bosquesillo {
 		if (moverArriba) {
 			y = (int) (ubicacion.getY() - y);
 			ubicacion.setLocation(ubicacion.getX(), y);
+			moverArriba = false;
 		}
 		if (moverAbajo) {
 			y = (int) (ubicacion.getY() + y); 
 			ubicacion.setLocation(ubicacion.getX(), y);
+			moverAbajo = false;
 		}
 		if (moverIzquierda) {
 			x = (int) (ubicacion.getX() - x);
 			ubicacion.setLocation(x, ubicacion.getY());
+			moverIzquierda = false;
 		}
 		if (moverDerecha) {
 			x = (int) ubicacion.getX() + x;
 			ubicacion.setLocation(x, ubicacion.getY());
+			moverDerecha = false;
 		}
 
 	}

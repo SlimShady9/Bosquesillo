@@ -9,17 +9,18 @@ import vista.*;
 
 public class Controlador{
 	private Bosquesillo b;
-	private PanelPrincipal p;
+	private JFrameP p;
 	private Tablero t;
 	private MonstruoLetal[] mL;
 	private Tormentoso[] thor;
 	private MuroDeTrump[] trump;
 	private int dimX, dimY;
+	
+	
 	public Controlador() {
 		dimX = ThreadLocalRandom.current().nextInt(300, 500);
 		dimY = ThreadLocalRandom.current().nextInt(300, 530);
 		while (dimX % 30 != 0) {
-			dimX++;
 		}
 		while (dimY % 30 != 0) {
 			dimY++;
@@ -29,7 +30,7 @@ public class Controlador{
 		iniciarTormentoso();
 		iniciarTablero();
 		iniciarMuroDeTrump();
-		p = new PanelPrincipal(this, dimX, dimY);
+		p = new JFrameP(this, dimX, dimY);
 	}
 	
 	private void iniciarMuroDeTrump() {
@@ -161,7 +162,6 @@ public class Controlador{
 		moverLetales();
 		b.setMoverArriba(true);
 		b.actualizar();
-		b.setMoverArriba(false);
 		b.verificarMuros();
 	}
 	public void moverAbajo() {
@@ -169,7 +169,6 @@ public class Controlador{
 		moverLetales();
 		b.setMoverAbajo(true);
 		b.actualizar();
-		b.setMoverAbajo(false);
 		b.verificarMuros();
 	}
 	public void moverIzquierda() {
@@ -177,7 +176,6 @@ public class Controlador{
 		moverLetales();
 		b.setMoverIzquierda(true);
 		b.actualizar();
-		b.setMoverIzquierda(false);
 		b.verificarMuros();
 	}
 	public void moverDerecha() {
@@ -185,7 +183,6 @@ public class Controlador{
 		moverLetales();
 		b.setMoverDerecha(true);
 		b.actualizar();
-		b.setMoverDerecha(false);
 		b.verificarMuros();
 	}
 }
