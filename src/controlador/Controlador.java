@@ -15,6 +15,9 @@ public class Controlador{
 	private Tormentoso[] thor;
 	private MuroDeTrump[] trump;
 	private int dimX, dimY;
+	private Configraciones cof;
+	
+	
 	public Controlador() {
 		dimX = ThreadLocalRandom.current().nextInt(300, 500);
 		dimY = ThreadLocalRandom.current().nextInt(300, 530);
@@ -24,12 +27,13 @@ public class Controlador{
 		while (dimY % 30 != 0) {
 			dimY++;
 		}
+		p = new JFrameP(this);
+		cof = p.getCof();
 		iniciarBosquesillo();
 		iniciarMostruoL();
 		iniciarTormentoso();
 		iniciarTablero();
 		iniciarMuroDeTrump();
-		p = new JFrameP(this, dimX, dimY);
 	}
 	
 	private void iniciarMuroDeTrump() {
@@ -55,7 +59,8 @@ public class Controlador{
 	}
 	public JLabel[] asignarThor(){
 		ImageIcon imagenThor;
-		int posX, posY;
+		int posX = cof.getValorx();
+		int posY = cof.getValory();
 		JLabel[] r = new JLabel[5];
 		for (int i = 0 ; i < r.length ; i++) {
 			thor[i] = new Tormentoso(dimX,dimY);
@@ -100,8 +105,8 @@ public class Controlador{
 	public JLabel[][] asignarTablero() {
 		ImageIcon imagenA = t.cargarImagenA();
 		ImageIcon imagenB = t.cargarImagenB();
-		int x = dimX / 30;
-		int y = dimY / 30;
+		int x = cof.getValorx();
+		int y = cof.getValory();
 		JLabel casillas[][] = new JLabel[x][y];
 		for (int i = 0; i < x ; i++) {
 			for (int j = 0 ; j < y ; j++) {

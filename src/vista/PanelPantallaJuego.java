@@ -15,10 +15,12 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 	private JLabel trump[];
 	private JLabel tablero[][];
 	private Controlador c;
-	public PanelPantallaJuego(Controlador co) {
+	private Configraciones cof;
+	public PanelPantallaJuego(Controlador co, Configraciones cof) {
 
 		setLayout(null);
 		c = co;
+		this.cof = cof;
 		iniciarObjetos();
 
 	}
@@ -64,8 +66,8 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 	}
 	public void cargarTabla() {
 		tablero = c.asignarTablero();
-		int x = c.getDimX() / 30;
-		int y = c.getDimY() / 30;
+		int x = cof.getValorx() * 30;
+		int y = cof.getValory() / 30;
 		for (int i = 0; i < x ; i++) {
 			for (int j = 0 ; j < y; j++) {
 				add(tablero[i][j]);

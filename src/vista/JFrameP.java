@@ -1,6 +1,7 @@
 package vista;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -21,13 +22,12 @@ public class JFrameP extends JFrame{
 	private Controlador c;
 	private int dimX, dimY;
 	
-	public JFrameP(Controlador co, int dimX, int dimY){
+	public JFrameP(Controlador co){
 		super("Juego");
 		c = co;
-		this.dimX = dimX;
-		this.dimY = dimY;
+		setBackground(Color.BLACK);
 		setLayout(null);
-		setSize(dimX, dimY);
+		setSize(600, 600);
 		setResizable(true);
 		setVisible(true);
 		iniciarPaneles();
@@ -38,16 +38,16 @@ public class JFrameP extends JFrame{
 	public void iniciarPaneles(){
 		pM = new PanelMenu(this);
 		pM.setVisible(true);
+		pM.setBounds(0 ,0 , 600, 600);
 		add(pM);
-		pM.setBounds(0, 0, dimX, dimY);
-		pJ = new PanelPantallaJuego(c);
-		pJ.setVisible(false);
-		add(pJ);
-		pJ.setBounds(0, 0 , dimX, dimY);
 		cof = new Configraciones(this);
 		cof.setVisible(false);
+		cof.setBounds(0, 0, 600, 600);
 		add(cof);
-		cof.setBounds(0, 0, dimX, dimY);
+		pJ = new PanelPantallaJuego(c, cof);
+		pJ.setVisible(false);
+		pJ.setBounds(0, 0, cof.getValorx()* 30, cof.getValory());
+		add(pJ);
 	}
 
 	public PanelPantallaJuego getpJ() {

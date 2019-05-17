@@ -21,93 +21,97 @@ import javax.swing.border.Border;
 
 public class Configraciones extends JPanel  implements ActionListener {
 
-	private JLabel dificultad ;
-	private JLabel facil;
-	private JLabel intermedio, dificil;
+	private JLabel dificultad, nCasillasX, nCasillasY ;
+	private JButton facil, intermedio, dificil;;
 	private JFrameP f;
-	private JButton volver;
+	private JButton volver, aceptar;
+	private JSpinner faspinnerx, faspinnery;
+	private int valorx, valory;
+	
 	public Configraciones(JFrameP f){
 		this.f = f;
+		setLayout(null);
+		setSize(600, 600);
+		setBackground(Color.getHSBColor(100, 100, 100));
 		cargarComponentes();
+
 	}
 
 	public void cargarComponentes() {
-		f.getContentPane().setBackground(Color.BLACK);
+
+		cargarLabels();
+		cargarBotonesDificultad();
+		cargarSpinners();
+		cargarBotones();
+
+	}
+	public void cargarLabels(){
+		Font fuente = new Font("Comic Sans MS", Font.ITALIC, 36);
+
+		dificultad = new JLabel("Creacion de la matriz");
+		dificultad.setFont(fuente);
+		dificultad.setBounds(20, 20, 150, 50);
+		add(dificultad);
+
+		nCasillasX = new JLabel("Numero de casillas en X");
+		nCasillasX.setFont(fuente);
+		nCasillasX.setBounds(20, 160, 150, 50);
+		add(nCasillasX);
+
+		nCasillasY = new JLabel("Numero de casillas en Y");
+		nCasillasY.setFont(fuente);
+		nCasillasY.setBounds(20, 230, 150, 50);
+		add(nCasillasY);
+
+
+	}
+
+
+	public void cargarBotonesDificultad(){
+		facil = new JButton(" Nivel Facil ");
+		facil.setFont(new Font("Comic Sans MS", Font.ITALIC, 20));
+		facil.setForeground(Color.BLACK);
+		add(facil);
+		facil.setBounds(40, 90, 150, 50);
+
+		intermedio = new JButton(" Nivel Intermedio  ");
+		intermedio.setFont(new Font("Comic Sans MS", Font.ITALIC, 20));
+		facil.setForeground(Color.BLACK);
+		add(intermedio);
+		intermedio.setBounds(200, 90, 150, 50);
+
+		dificil = new JButton (" Nivel Dificil  ");
+		add(dificil);
+		dificil.setFont(new Font("Comic Sans MS", Font.ITALIC, 20));
+		facil.setForeground(Color.BLACK);
+		dificil.setBounds(400, 90, 150, 50);
+
+	}
+	public void cargarSpinners(){
+		SpinnerModel fa = new SpinnerNumberModel(5,5,20,1);
+		SpinnerModel fay = new SpinnerNumberModel(5,5,20,1);
+		faspinnerx = new JSpinner(fa);
+		faspinnery = new JSpinner(fay);
+		add(faspinnery);
+		add(faspinnerx);
+		faspinnerx.setBounds(200, 160, 50, 50);
+		faspinnery.setBounds(200, 230, 50, 50);
+
+	}
+	public void cargarBotones(){
 		volver = new JButton ("volver");
-		add(volver);
 		volver.addActionListener(this);
 		volver.setBackground(Color.DARK_GRAY);
-		
-		volver.setLayout(new FlowLayout());
-		dificultad = new JLabel("Creacion de la matriz");
-		add(dificultad);
-		Font fuente0=new Font("Comic Sans MS", Font.ITALIC, 36);
-		dificultad.setFont(fuente0);
-		Font fuente=new Font("Book Antiqua", Font.ITALIC, 38);
-		volver.setFont(fuente);		
-		facil = new JLabel(" Nivel Facil  ");
-		add(facil);
-		Font fuente1=new Font("Comic Sans MS", Font.ITALIC, 20);
-		facil.setFont(fuente1);
-		facil.setForeground(Color.BLACK);
-		Border borde1 = BorderFactory.createLineBorder(Color.DARK_GRAY, 2);
-        facil.setBorder(borde1);
-		SpinnerModel fa = new SpinnerNumberModel(5,5,8,1);
-		JSpinner faspinnerx = new JSpinner(fa);
-		add(faspinnerx);
-		Integer valorx = (Integer)faspinnerx.getValue();
-		SpinnerModel fay = new SpinnerNumberModel(5,5,8,1);
-		JSpinner faspinnery = new JSpinner(fay);
-		add(faspinnery);
-		Integer valory = (Integer)faspinnery.getValue();
-		faspinnerx.setBackground(Color.BLACK);
-		faspinnerx.getEditor().getComponent(0).setBackground(Color.BLACK);
-		faspinnery.setBackground(Color.BLACK);
-		faspinnery.getEditor().getComponent(0).setBackground(Color.BLACK);
-		faspinnerx.setLayout(new FlowLayout());
-		faspinnery.setLayout(new FlowLayout());
-		intermedio = new JLabel(" Nivel Intermedio  ");
-		add(intermedio);
-		Font fuente2=new Font("Comic Sans MS", Font.ITALIC, 20);
-		intermedio.setFont(fuente2);
-		SpinnerModel in = new SpinnerNumberModel(8,8,15,1);
-		JSpinner inspinnerx = new JSpinner(in);
-		add(inspinnerx);
-		Integer valorix = (Integer)inspinnerx.getValue();
-		SpinnerModel iny = new SpinnerNumberModel(8,8,15,1);
-		JSpinner inspinnery = new JSpinner(iny);
-		add(inspinnery);
-		inspinnerx.setBackground(Color.BLACK);
-		inspinnerx.getEditor().getComponent(0).setBackground(Color.BLACK);
-		inspinnery.setBackground(Color.BLACK);
-		inspinnery.getEditor().getComponent(0).setBackground(Color.BLACK);
-		inspinnerx.setLayout(new FlowLayout());
-		inspinnery.setLayout(new FlowLayout());
-		intermedio.setForeground(Color.BLACK);
-		Border borde2 = BorderFactory.createLineBorder(Color.DARK_GRAY, 2);
-        intermedio.setBorder(borde2);
-		dificil = new JLabel (" Nivel Dificil  ");
-		add(dificil);
-		Font fuente3=new Font("Comic Sans MS", Font.ITALIC, 20);
-		dificil.setFont(fuente3);
-		SpinnerModel di = new SpinnerNumberModel(15,15,20,1);
-		JSpinner dispinnerx = new JSpinner(di);
-		add(dispinnerx);
-		Integer valordx = (Integer)dispinnerx.getValue();
-		SpinnerModel diy = new SpinnerNumberModel(15,15,20,1);
-		JSpinner dispinnery = new JSpinner(diy);
-		add(dispinnery);
-		Integer valordy = (Integer)dispinnery.getValue();
-		dispinnerx.setBackground(Color.BLACK);
-		dispinnerx.getEditor().getComponent(0).setBackground(Color.BLACK);
-		dispinnery.setBackground(Color.BLACK);
-		dispinnery.getEditor().getComponent(0).setBackground(Color.BLACK);
-		dispinnerx.setLayout(new FlowLayout());
-		dispinnery.setLayout(new FlowLayout());
-		dificil.setForeground(Color.BLACK);
-		Border borde3 = BorderFactory.createLineBorder(Color.DARK_GRAY, 2);
-        dificil.setBorder(borde3);
-        
+		volver.setFont(new Font("Book Antiqua", Font.ITALIC, 38));
+		volver.setBounds(20, 530, 150, 50);
+		add(volver);
+
+		aceptar = new JButton("aceptar");
+		aceptar.addActionListener(this);
+		aceptar.setBackground(Color.DARK_GRAY);
+		aceptar.setFont(new Font("Book Antiqua", Font.ITALIC, 38));
+		aceptar.setBounds(450, 530 , 150, 50);
+		add(aceptar);
 	}
 	public void actionPerformed(ActionEvent arg0) {
 		String accion = arg0.getActionCommand();
@@ -117,5 +121,20 @@ public class Configraciones extends JPanel  implements ActionListener {
 			f.getpM().setVisible(true);
 
 		}
+		if( accion==aceptar.getActionCommand()){
+			valorx = (int)faspinnerx.getValue();
+			valory = (int)faspinnery.getValue();
+			setVisible(false);
+			f.getpM().setVisible(true);
+		}
 	}
+
+	public int getValorx() {
+		return valorx;
+	}
+
+	public int getValory() {
+		return valory;
+	}
+	
 }
