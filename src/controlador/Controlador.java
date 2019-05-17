@@ -15,12 +15,11 @@ public class Controlador{
 	private Tormentoso[] thor;
 	private MuroDeTrump[] trump;
 	private int dimX, dimY;
-	
-	
 	public Controlador() {
 		dimX = ThreadLocalRandom.current().nextInt(300, 500);
 		dimY = ThreadLocalRandom.current().nextInt(300, 530);
 		while (dimX % 30 != 0) {
+			dimX++;
 		}
 		while (dimY % 30 != 0) {
 			dimY++;
@@ -36,7 +35,6 @@ public class Controlador{
 	private void iniciarMuroDeTrump() {
 		trump = new MuroDeTrump[5];
 	}
-
 	public void iniciarBosquesillo () {
 		b = new Bosquesillo(dimX, dimY);
 	}
@@ -143,17 +141,39 @@ public class Controlador{
 	public void moverThors() {
 		for (int i = 0 ; i < thor.length ; i++) {
 			thor[i].setMoverse(true);
-			thor[i].moverse();
-			thor[i].setMoverse(false);
 			thor[i].verificarMuros();
+			for (int j = 0 ; j < trump.length ; j++ ) {
+				thor[i].verificarObjs(trump[j].getUbicacion());
+			}
+			for (int k = 0 ; k < mL.length ; k++ ) {
+				thor[i].verificarObjs(mL[k].getUbicacion());
+			}
+			for (int l = 0 ; l < thor.length ; l++) {
+				if (i != l) {
+					thor[i].verificarObjs(thor[l].getUbicacion());
+				}
+			}
+			thor[i].moverse();
+			
 		}
 	}
 	public void moverLetales() {
 		for (int i = 0 ; i < mL.length ; i++) {
 			mL[i].setMoverse(true);
-			mL[i].moverse();
-			mL[i].setMoverse(false);
 			mL[i].verificarMuros();
+			for (int j = 0 ; j < trump.length ; j++) {
+				mL[i].verificarObjs(trump[j].getUbicacion());
+			}
+			for (int k = 0 ; k < thor.length ; k++) {
+				mL[i].verificarObjs(thor[k].getUbicacion());
+			}
+			for (int l = 0 ; l < mL.length ; l++) {
+				if (i != l) {
+					mL[i].verificarObjs(mL[l].getUbicacion());
+				}
+			}
+			mL[i].moverse();
+			
 		}
 	}
 
@@ -161,28 +181,42 @@ public class Controlador{
 		moverThors();
 		moverLetales();
 		b.setMoverArriba(true);
-		b.actualizar();
 		b.verificarMuros();
+		for (int i = 0 ; i < trump.length ; i++) {
+			b.verificarObjs(trump[i].getUbicacion());
+		}
+		b.actualizar();
 	}
 	public void moverAbajo() {
 		moverThors();
 		moverLetales();
 		b.setMoverAbajo(true);
-		b.actualizar();
 		b.verificarMuros();
+		for (int i = 0 ; i < trump.length ; i++) {
+			b.verificarObjs(trump[i].getUbicacion());
+		}
+		b.actualizar();
+		
 	}
 	public void moverIzquierda() {
 		moverThors();
 		moverLetales();
 		b.setMoverIzquierda(true);
-		b.actualizar();
 		b.verificarMuros();
+		for (int i = 0 ; i < trump.length ; i++) {
+			b.verificarObjs(trump[i].getUbicacion());
+		}
+		b.actualizar();
+		
 	}
 	public void moverDerecha() {
 		moverThors();
 		moverLetales();
 		b.setMoverDerecha(true);
-		b.actualizar();
 		b.verificarMuros();
+		for (int i = 0 ; i < trump.length ; i++) {
+			b.verificarObjs(trump[i].getUbicacion());
+		}
+		b.actualizar();
 	}
 }
