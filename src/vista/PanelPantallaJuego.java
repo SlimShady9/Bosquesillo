@@ -125,6 +125,7 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 			actualizarPThores();
 
 		}
+
 	}
 
 
@@ -138,8 +139,6 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 	public void keyTyped(KeyEvent arg0) {
 
 	}
-
-
 
 
 }

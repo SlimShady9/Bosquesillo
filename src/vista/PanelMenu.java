@@ -25,22 +25,22 @@ public class PanelMenu extends JPanel implements ActionListener {
 	public void iniciarBotones(){
 		inicio = new JButton("Jugar");
 		add(inicio);
-		inicio.setBackground(Color.lightGray);
-		inicio.setForeground(Color.red);
+		inicio.setBackground(Color.BLACK);
+		inicio.setForeground(Color.WHITE);
 		Font fuente=new Font("Book Antiqua", Font.ITALIC, 36);
 		inicio.setFont(fuente);
 		inicio.addActionListener(this);
 		configuraciones = new JButton("Configuraciones");
 		add(configuraciones);
-		configuraciones.setBackground(Color.DARK_GRAY);
-		configuraciones.setForeground(Color.red);
+		configuraciones.setBackground(Color.BLACK);
+		configuraciones.setForeground(Color.WHITE);
 		Font fuente1=new Font("Book Antiqua", Font.ITALIC, 36);
 		configuraciones.setFont(fuente1);
 		configuraciones.addActionListener(this);
 		creditos = new JButton("Salir");
 		add(creditos);
-		creditos.setBackground(Color.LIGHT_GRAY);
-		creditos.setForeground(Color.red);
+		creditos.setBackground(Color.BLACK);
+		creditos.setForeground(Color.WHITE);
 		Font fuente2=new Font("Book Antiqua", Font.ITALIC, 36);
 		creditos.setFont(fuente2);
 	}

@@ -4,19 +4,22 @@ import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.ImageIcon;
 
 public class MonstruoLetal {
-	
+
 	private ImageIcon imagen;
 	private Point ubicacion;
 	private int maxX, maxY;
-	private boolean moverse;
-	
+	private boolean moverDerecha, moverIzquierda, moverAbajo, moverArriba ;
+
 	public MonstruoLetal(int x, int y){
-		moverse = true;
+		moverArriba = false;
+		moverAbajo = false; 
+		moverIzquierda = false;
+		moverDerecha = false;
 		maxX = x;
 		maxY = y;
 		iniciarPosicion();
 	}
-	
+
 	public void iniciarPosicion(){
 		int posX = ThreadLocalRandom.current().nextInt(0 , maxX - 30);
 		int posY = ThreadLocalRandom.current().nextInt(0 , maxY - 60);
@@ -47,32 +50,31 @@ public class MonstruoLetal {
 			moverArriba = false;
 		}
 	}
-	
+
 	public void moverse(){
 		int x = 30;
 		int y = 30;
-		if (moverse){
-			int direccion = ThreadLocalRandom.current().nextInt(0, 4);
-			if (direccion == 0){
-				y = (int) (ubicacion.getY() - y); 
-				ubicacion.setLocation(ubicacion.getX(), y);
-				moverse = false;
-			}
-			if (direccion == 1){
-				y = (int) (ubicacion.getY() + y);
-				ubicacion.setLocation(ubicacion.getX(), y);
-				moverse = false;
-			}
-			if (direccion == 2){
-				x = (int) (ubicacion.getX() + x);
-				ubicacion.setLocation(x, ubicacion.getY());
-				moverse = false;
-			}
-			if (direccion == 3){
-				x = (int) (ubicacion.getX() - x);
-				ubicacion.setLocation(x, ubicacion.getY());
-				moverse = false;
-			}
+		int direccion = ThreadLocalRandom.current().nextInt(0, 4);
+		
+		if (direccion == 0 && moverArriba == true){
+			y = (int) (ubicacion.getY() - y); 
+			ubicacion.setLocation(ubicacion.getX(), y);
+			setMoverse(false);
+		}
+		else if (direccion == 1 && moverAbajo == true){
+			y = (int) (ubicacion.getY() + y);
+			ubicacion.setLocation(ubicacion.getX(), y);
+			setMoverse(false);
+		}
+		else if (direccion == 2 && moverDerecha == true){
+			x = (int) (ubicacion.getX() + x);
+			ubicacion.setLocation(x, ubicacion.getY());
+			setMoverse(false);
+		}
+		else if (direccion == 3 && moverIzquierda == true){
+			x = (int) (ubicacion.getX() - x);
+			ubicacion.setLocation(x, ubicacion.getY());
+			setMoverse(false);
 		}
 	}
 	public void verificarMuros() {
@@ -90,22 +92,16 @@ public class MonstruoLetal {
 		}
 	}
 
-	
+
 	public Point getUbicacion() {
 		return ubicacion;
 	}
 
-	public void setMoverArriba(boolean moverArriba) {
-		this.moverArriba = moverArriba;
+	public void setMoverse(boolean mov) {
+		moverDerecha = mov;
+		moverIzquierda = mov;
+		moverAbajo = mov;
+		moverArriba = mov;
 	}
-	public void setMoverAbajo(boolean moverAbajo) {
-		this.moverAbajo = moverAbajo;
-	}
-	public void setMoverIzquierda(boolean moverIzquierda) {
-		this.moverIzquierda = moverIzquierda;
-	}
-	public void setMoverDerecha(boolean moverDerecha) {
-		this.moverDerecha = moverDerecha;
-	}
-	
+
 }
