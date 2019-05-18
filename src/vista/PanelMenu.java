@@ -51,6 +51,7 @@ public class PanelMenu extends JPanel implements ActionListener {
 
 		if (accion == inicio.getActionCommand()){
 			setVisible(false);
+			p.iniciarPanelPJuego();
 			p.getpJ().setVisible(true);
 
 		}

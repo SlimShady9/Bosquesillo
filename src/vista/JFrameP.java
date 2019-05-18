@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import controlador.Ajustes;
 import controlador.Controlador;
 
 public class JFrameP extends JFrame{
@@ -18,9 +19,8 @@ public class JFrameP extends JFrame{
 	private PanelPantallaJuego pJ;
 	private PanelFinal pF;
 	private PanelMenu pM;
-	private Configraciones cof;
 	private Controlador c;
-	private int dimX, dimY;
+	private Configraciones cof;
 	
 	public JFrameP(Controlador co){
 		super("Juego");
@@ -44,10 +44,16 @@ public class JFrameP extends JFrame{
 		cof.setVisible(false);
 		cof.setBounds(0, 0, 600, 600);
 		add(cof);
-		pJ = new PanelPantallaJuego(c, cof);
+	}
+	
+	public void iniciarPanelPJuego() {
+		int posX = (570 -((cof.getValorx() * 30) ))/2;
+		int posY = (570 -((cof.getValory() * 30) ))/2;
+		pJ = new PanelPantallaJuego(c);
 		pJ.setVisible(false);
-		pJ.setBounds(0, 0, cof.getValorx()* 30, cof.getValory());
+		pJ.setBounds(posX, posY, cof.getValorx() * 30, cof.getValory() * 30);
 		add(pJ);
+		
 	}
 
 	public PanelPantallaJuego getpJ() {
@@ -64,6 +70,9 @@ public class JFrameP extends JFrame{
 
 	public Configraciones getCof() {
 		return cof;
+	}
+	public Controlador getControl() {
+		return c;
 	}
 	
 	

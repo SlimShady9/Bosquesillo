@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controlador.Ajustes;
 import controlador.Controlador;
 
 public class PanelPantallaJuego extends JPanel implements KeyListener{
@@ -15,12 +16,13 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 	private JLabel trump[];
 	private JLabel tablero[][];
 	private Controlador c;
-	private Configraciones cof;
-	public PanelPantallaJuego(Controlador co, Configraciones cof) {
+	private Ajustes ajustes;
+	public PanelPantallaJuego(Controlador co) {
 
 		setLayout(null);
 		c = co;
-		this.cof = cof;
+		ajustes = c.getAjustes();
+		c.iniciarComponentes();
 		iniciarObjetos();
 
 	}
@@ -66,8 +68,8 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 	}
 	public void cargarTabla() {
 		tablero = c.asignarTablero();
-		int x = cof.getValorx() * 30;
-		int y = cof.getValory() / 30;
+		int x = ajustes.getDimX() ;
+		int y = ajustes.getDimY() ;
 		for (int i = 0; i < x ; i++) {
 			for (int j = 0 ; j < y; j++) {
 				add(tablero[i][j]);
@@ -133,14 +135,19 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-
+		// TODO Auto-generated method stub
+		
 	}
 
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-
+		// TODO Auto-generated method stub
+		
 	}
+
+
+
 
 
 }

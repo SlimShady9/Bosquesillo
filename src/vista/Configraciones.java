@@ -30,6 +30,8 @@ public class Configraciones extends JPanel  implements ActionListener {
 	
 	public Configraciones(JFrameP f){
 		this.f = f;
+		valorx = 15;
+		valory = 15;
 		setLayout(null);
 		setSize(600, 600);
 		setBackground(Color.getHSBColor(100, 100, 100));
@@ -48,19 +50,19 @@ public class Configraciones extends JPanel  implements ActionListener {
 	public void cargarLabels(){
 		Font fuente = new Font("Comic Sans MS", Font.ITALIC, 36);
 
-		dificultad = new JLabel("Creacion de la matriz");
+		dificultad = new JLabel("Dificultad");
 		dificultad.setFont(fuente);
-		dificultad.setBounds(20, 20, 150, 50);
+		dificultad.setBounds(200, 20, 500, 50);
 		add(dificultad);
 
 		nCasillasX = new JLabel("Numero de casillas en X");
 		nCasillasX.setFont(fuente);
-		nCasillasX.setBounds(20, 160, 150, 50);
+		nCasillasX.setBounds(20, 160, 500, 50);
 		add(nCasillasX);
 
 		nCasillasY = new JLabel("Numero de casillas en Y");
 		nCasillasY.setFont(fuente);
-		nCasillasY.setBounds(20, 230, 150, 50);
+		nCasillasY.setBounds(20, 230, 500, 50);
 		add(nCasillasY);
 
 
@@ -68,19 +70,19 @@ public class Configraciones extends JPanel  implements ActionListener {
 
 
 	public void cargarBotonesDificultad(){
-		facil = new JButton(" Nivel Facil ");
+		facil = new JButton(" Facil ");
 		facil.setFont(new Font("Comic Sans MS", Font.ITALIC, 20));
 		facil.setForeground(Color.BLACK);
 		add(facil);
 		facil.setBounds(40, 90, 150, 50);
 
-		intermedio = new JButton(" Nivel Intermedio  ");
+		intermedio = new JButton(" Medio  ");
 		intermedio.setFont(new Font("Comic Sans MS", Font.ITALIC, 20));
 		facil.setForeground(Color.BLACK);
 		add(intermedio);
-		intermedio.setBounds(200, 90, 150, 50);
+		intermedio.setBounds(220, 90, 150, 50);
 
-		dificil = new JButton (" Nivel Dificil  ");
+		dificil = new JButton (" Dificil  ");
 		add(dificil);
 		dificil.setFont(new Font("Comic Sans MS", Font.ITALIC, 20));
 		facil.setForeground(Color.BLACK);
@@ -94,23 +96,23 @@ public class Configraciones extends JPanel  implements ActionListener {
 		faspinnery = new JSpinner(fay);
 		add(faspinnery);
 		add(faspinnerx);
-		faspinnerx.setBounds(200, 160, 50, 50);
-		faspinnery.setBounds(200, 230, 50, 50);
+		faspinnerx.setBounds(500, 160, 50, 50);
+		faspinnery.setBounds(500, 230, 50, 50);
 
 	}
 	public void cargarBotones(){
-		volver = new JButton ("volver");
+		volver = new JButton ("Volver");
 		volver.addActionListener(this);
 		volver.setBackground(Color.DARK_GRAY);
 		volver.setFont(new Font("Book Antiqua", Font.ITALIC, 38));
-		volver.setBounds(20, 530, 150, 50);
+		volver.setBounds(20, 500, 190, 50);
 		add(volver);
 
-		aceptar = new JButton("aceptar");
+		aceptar = new JButton("Aceptar");
 		aceptar.addActionListener(this);
 		aceptar.setBackground(Color.DARK_GRAY);
 		aceptar.setFont(new Font("Book Antiqua", Font.ITALIC, 38));
-		aceptar.setBounds(450, 530 , 150, 50);
+		aceptar.setBounds(400, 500 , 190, 50);
 		add(aceptar);
 	}
 	public void actionPerformed(ActionEvent arg0) {
@@ -124,6 +126,7 @@ public class Configraciones extends JPanel  implements ActionListener {
 		if( accion==aceptar.getActionCommand()){
 			valorx = (int)faspinnerx.getValue();
 			valory = (int)faspinnery.getValue();
+			f.getControl().getAjustes().cargarValores(valorx, valory);
 			setVisible(false);
 			f.getpM().setVisible(true);
 		}

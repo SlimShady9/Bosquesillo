@@ -23,13 +23,13 @@ public class Tormentoso {
 	}
 
 	public void iniciarPosicion(){
-		int posX = ThreadLocalRandom.current().nextInt(0 , maxX - 30);
-		int posY = ThreadLocalRandom.current().nextInt(0 , maxY - 60);
+		int posX = ThreadLocalRandom.current().nextInt(0 , maxX );
+		int posY = ThreadLocalRandom.current().nextInt(0 , maxY );
 		while (posX % 30 != 0){
-			posX++;
+			posX --;
 		}
 		while (posY % 30 != 0){
-			posY++;
+			posY --;
 		}
 		ubicacion = new Point(posX, posY);
 	}

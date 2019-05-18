@@ -16,17 +16,17 @@ public class Bosquesillo {
 		moverIzquierda = false;
 		moverDerecha = false;
 		maxX = x;
-		maxY= y;
+		maxY = y;
 		posInicial();
 	}
 	public void posInicial(){
-		int posX = ThreadLocalRandom.current().nextInt(0, maxX - 30 );
-		int posY = ThreadLocalRandom.current().nextInt(0, maxY - 60 );
+		int posX = ThreadLocalRandom.current().nextInt(0, maxX );
+		int posY = ThreadLocalRandom.current().nextInt(0, maxY );
 		while (posX % 30 != 0) {
-			posX ++;
+			posX --;
 		}
 		while (posY % 30 != 0) {
-			posY++;
+			posY --;
 		}
 		ubicacion = new Point(posX, posY);
 	}
@@ -38,7 +38,7 @@ public class Bosquesillo {
 		if (ubicacion.getX() == 0) {
 			moverIzquierda = false;
 		}
-		if (ubicacion.getY() + 60 == maxY ) {
+		if (ubicacion.getY() + 30 == maxY ) {
 			moverAbajo = false;
 		}
 		if (ubicacion.getY() == 0) {
