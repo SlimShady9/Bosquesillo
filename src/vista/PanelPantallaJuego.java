@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controlador.Controlador;
+import modelo.Ajustes;
 
 public class PanelPantallaJuego extends JPanel implements KeyListener{
 
@@ -15,10 +16,14 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 	private JLabel trump[];
 	private JLabel tablero[][];
 	private Controlador c;
-	public PanelPantallaJuego(Controlador co) {
+	private JFrameP fr;
+	private JPanel esc;
+	public PanelPantallaJuego(JFrameP fr) {
 
+		this.fr = fr;
 		setLayout(null);
-		c = co;
+		c = fr.getControl();
+		c.iniciarCompoJuego();
 		iniciarObjetos();
 
 	}
@@ -33,7 +38,7 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 	}
 
 	private void cargarTrump() {
-		trump = new JLabel[5];
+		trump = new JLabel[c.getAjustes().getcObjetos()];
 		JLabel[] eo = c.asignarTrumps();
 		for (int i = 0 ; i < trump.length ; i++) {
 			trump[i] = eo[i];
@@ -41,7 +46,7 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 		}
 	}
 	public void cargarThor (){
-		thor = new JLabel[5];
+		thor = new JLabel[c.getAjustes().getcObjetos()];
 		JLabel[] eo = c.asignarThor();
 		for (int i = 0 ; i < thor.length ; i++) {
 			thor[i] = eo[i];
@@ -55,8 +60,10 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 	}
 
 	public void cagarMonstruo(){
-		mLetal = new JLabel[5];
+		mLetal = new JLabel[c.getAjustes().getcObjetos()];
+		System.out.println(mLetal.length);
 		JLabel[] eo = c.asignarMonstuoL();
+		System.out.println(eo.length);
 		for (int i = 0; i < mLetal.length; i++) {
 			mLetal[i] = eo[i];
 			add(mLetal[i]);
@@ -64,8 +71,8 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 	}
 	public void cargarTabla() {
 		tablero = c.asignarTablero();
-		int x = c.getDimX() / 30;
-		int y = c.getDimY() / 30;
+		int x = c.getAjustes().getDimX() ;
+		int y = c.getAjustes().getDimY() ;
 		for (int i = 0; i < x ; i++) {
 			for (int j = 0 ; j < y; j++) {
 				add(tablero[i][j]);
@@ -93,7 +100,7 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 	public JButton getBotonB() {
 		return botonB;
 	}
-
+	
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
@@ -125,21 +132,26 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 			actualizarPThores();
 
 		}
+		if( key ==  KeyEvent.VK_ESCAPE) {
+			
+		}
+
 	}
 
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-
+		
 	}
+
 
 
 

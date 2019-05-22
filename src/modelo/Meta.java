@@ -1,16 +1,17 @@
 package modelo;
+
 import java.awt.Point;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.ImageIcon;
 
 
-public class MuroDeTrump {
+public class Meta {
 
 	private ImageIcon imagen;
 	private Point ubicacion;
 	private int maxX, maxY;
 
-	public MuroDeTrump (int x, int y){
+	public Meta (int x, int y){
 
 		maxX = x;
 		maxY = y;
@@ -29,7 +30,7 @@ public class MuroDeTrump {
 		ubicacion = new Point(posX, posY);
 	}
 	public ImageIcon cargarImagen(){
-		imagen = new ImageIcon("Data/Muro.png");
+		imagen = new ImageIcon("Data/Meta.png");
 		return imagen;
 	}
 

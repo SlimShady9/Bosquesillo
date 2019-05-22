@@ -9,41 +9,61 @@ import vista.*;
 
 public class Controlador{
 	private Bosquesillo b;
-	private PanelPrincipal p;
+	private JFrameP p;
 	private Tablero t;
 	private MonstruoLetal[] mL;
 	private Tormentoso[] thor;
 	private MuroDeTrump[] trump;
 	private int dimX, dimY;
+	private Ajustes ajustes;
+	private Carreta c;
+	private Meta mE;
+	private Checkpoint[] cH;
+
+
 	public Controlador() {
-		dimX = ThreadLocalRandom.current().nextInt(300, 500);
-		dimY = ThreadLocalRandom.current().nextInt(300, 530);
-		while (dimX % 30 != 0) {
-			dimX++;
-		}
-		while (dimY % 30 != 0) {
-			dimY++;
-		}
+
+		ajustes = new Ajustes();
+		p = new JFrameP(this);
+		
+	}
+
+	public void iniciarCompoJuego() {
+		dimX = ajustes.getDimX() * 30;
+		dimY = ajustes.getDimY() * 30;
 		iniciarBosquesillo();
 		iniciarMostruoL();
 		iniciarTormentoso();
 		iniciarTablero();
 		iniciarMuroDeTrump();
-		p = new PanelPrincipal(this, dimX, dimY);
-	}
-	
-	private void iniciarMuroDeTrump() {
-		trump = new MuroDeTrump[5];
+		iniciarCheckpoint();
+		iniciarCarreta();
+		iniciarMeta();
 	}
 
+	public void iniciarMeta() {
+		mE = new Meta(dimX, dimY);
+
+	}
+	public void iniciarCarreta() {
+		c = new Carreta(dimX, dimY);
+
+	}
+	public void iniciarCheckpoint() {
+		cH = new Checkpoint [ajustes.getcObjetos()];
+
+	}
+	public void iniciarMuroDeTrump() {
+		trump = new MuroDeTrump[ajustes.getcObjetos()];
+	}
 	public void iniciarBosquesillo () {
 		b = new Bosquesillo(dimX, dimY);
 	}
 	public void iniciarTormentoso(){
-		thor = new Tormentoso[5];
+		thor = new Tormentoso[ajustes.getcObjetos()];
 	}
 	public void iniciarMostruoL(){
-		mL = new MonstruoLetal[5];
+		mL = new MonstruoLetal[ajustes.getcObjetos()];
 	}
 	public void iniciarTablero() {
 		t = new Tablero();
@@ -57,7 +77,7 @@ public class Controlador{
 	public JLabel[] asignarThor(){
 		ImageIcon imagenThor;
 		int posX, posY;
-		JLabel[] r = new JLabel[5];
+		JLabel[] r = new JLabel[ajustes.getcObjetos()];
 		for (int i = 0 ; i < r.length ; i++) {
 			thor[i] = new Tormentoso(dimX,dimY);
 			imagenThor = thor[i].cargarImagen();
@@ -67,11 +87,11 @@ public class Controlador{
 			r[i].setBounds(posX, posY, 30, 30);
 		}
 		return r;
-		}
+	}
 	public JLabel[] asignarMonstuoL(){
 		ImageIcon imagenML;
 		int posX, posY;
-		JLabel[] r = new JLabel[5];
+		JLabel[] r = new JLabel[ajustes.getcObjetos()];
 		for (int i = 0 ; i < r.length ; i++) {
 			mL[i] = new MonstruoLetal(dimX,dimY);
 			imagenML = mL[i].cargarImagen();
@@ -84,9 +104,8 @@ public class Controlador{
 	}
 	public JLabel[] asignarTrumps(){
 		ImageIcon imagenTrump;
-		int posX ;
-		int posY ;
-		JLabel[] r = new JLabel[5];
+		int posX, posY ;
+		JLabel[] r = new JLabel[ajustes.getcObjetos()];
 		for (int i = 0 ; i < r.length ; i++) {
 			trump[i] = new MuroDeTrump(dimX,dimY);
 			imagenTrump = trump[i].cargarImagen();
@@ -97,12 +116,12 @@ public class Controlador{
 		}
 		return r;
 	}	
-		
+
 	public JLabel[][] asignarTablero() {
 		ImageIcon imagenA = t.cargarImagenA();
 		ImageIcon imagenB = t.cargarImagenB();
-		int x = dimX / 30;
-		int y = dimY / 30;
+		int x = ajustes.getDimX();
+		int y = ajustes.getDimY();
 		JLabel casillas[][] = new JLabel[x][y];
 		for (int i = 0; i < x ; i++) {
 			for (int j = 0 ; j < y ; j++) {
@@ -118,7 +137,12 @@ public class Controlador{
 		}
 		return casillas;
 	}
-	
+
+
+	public Ajustes getAjustes() {
+		return ajustes;
+	}
+
 	public Point getBosque() {
 		return b.getUbicacion();
 	}
@@ -138,21 +162,43 @@ public class Controlador{
 	public int getDimY() {
 		return dimY;
 	}
-	
+
 	public void moverThors() {
 		for (int i = 0 ; i < thor.length ; i++) {
 			thor[i].setMoverse(true);
-			thor[i].moverse();
-			thor[i].setMoverse(false);
 			thor[i].verificarMuros();
+			for (int j = 0 ; j < trump.length ; j++ ) {
+				thor[i].verificarObjs(trump[j].getUbicacion());
+			}
+			for (int k = 0 ; k < mL.length ; k++ ) {
+				thor[i].verificarObjs(mL[k].getUbicacion());
+			}
+			for (int l = 0 ; l < thor.length ; l++) {
+				if (i != l) {
+					thor[i].verificarObjs(thor[l].getUbicacion());
+				}
+			}
+			thor[i].moverse();
+
 		}
 	}
 	public void moverLetales() {
 		for (int i = 0 ; i < mL.length ; i++) {
 			mL[i].setMoverse(true);
-			mL[i].moverse();
-			mL[i].setMoverse(false);
 			mL[i].verificarMuros();
+			for (int j = 0 ; j < trump.length ; j++) {
+				mL[i].verificarObjs(trump[j].getUbicacion());
+			}
+			for (int k = 0 ; k < thor.length ; k++) {
+				mL[i].verificarObjs(thor[k].getUbicacion());
+			}
+			for (int l = 0 ; l < mL.length ; l++) {
+				if (i != l) {
+					mL[i].verificarObjs(mL[l].getUbicacion());
+				}
+			}
+			mL[i].moverse();
+
 		}
 	}
 
@@ -160,32 +206,42 @@ public class Controlador{
 		moverThors();
 		moverLetales();
 		b.setMoverArriba(true);
-		b.actualizar();
-		b.setMoverArriba(false);
 		b.verificarMuros();
+		for (int i = 0 ; i < trump.length ; i++) {
+			b.verificarObjs(trump[i].getUbicacion());
+		}
+		b.actualizar();
 	}
 	public void moverAbajo() {
 		moverThors();
 		moverLetales();
 		b.setMoverAbajo(true);
-		b.actualizar();
-		b.setMoverAbajo(false);
 		b.verificarMuros();
+		for (int i = 0 ; i < trump.length ; i++) {
+			b.verificarObjs(trump[i].getUbicacion());
+		}
+		b.actualizar();
+
 	}
 	public void moverIzquierda() {
 		moverThors();
 		moverLetales();
 		b.setMoverIzquierda(true);
-		b.actualizar();
-		b.setMoverIzquierda(false);
 		b.verificarMuros();
+		for (int i = 0 ; i < trump.length ; i++) {
+			b.verificarObjs(trump[i].getUbicacion());
+		}
+		b.actualizar();
+
 	}
 	public void moverDerecha() {
 		moverThors();
 		moverLetales();
 		b.setMoverDerecha(true);
-		b.actualizar();
-		b.setMoverDerecha(false);
 		b.verificarMuros();
+		for (int i = 0 ; i < trump.length ; i++) {
+			b.verificarObjs(trump[i].getUbicacion());
+		}
+		b.actualizar();
 	}
 }
