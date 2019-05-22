@@ -27,7 +27,7 @@ public class Configraciones extends JPanel  implements ActionListener {
 	private JButton volver, aceptar;
 	private JSpinner faspinnerx, faspinnery;
 	private int valorx, valory;
-	
+
 	public Configraciones(JFrameP f){
 		this.f = f;
 		valorx = 15;
@@ -73,19 +73,23 @@ public class Configraciones extends JPanel  implements ActionListener {
 		facil = new JButton(" Facil ");
 		facil.setFont(new Font("Comic Sans MS", Font.ITALIC, 20));
 		facil.setForeground(Color.BLACK);
+		facil.addActionListener(this);
 		add(facil);
 		facil.setBounds(40, 90, 150, 50);
 
 		intermedio = new JButton(" Medio  ");
 		intermedio.setFont(new Font("Comic Sans MS", Font.ITALIC, 20));
-		facil.setForeground(Color.BLACK);
+		intermedio.setForeground(Color.BLACK);
+		intermedio.addActionListener(this);
 		add(intermedio);
+
 		intermedio.setBounds(220, 90, 150, 50);
 
 		dificil = new JButton (" Dificil  ");
 		add(dificil);
 		dificil.setFont(new Font("Comic Sans MS", Font.ITALIC, 20));
-		facil.setForeground(Color.BLACK);
+		dificil.setForeground(Color.BLACK);
+		dificil.addActionListener(this);
 		dificil.setBounds(400, 90, 150, 50);
 
 	}
@@ -117,6 +121,7 @@ public class Configraciones extends JPanel  implements ActionListener {
 	}
 	public void actionPerformed(ActionEvent arg0) {
 		String accion = arg0.getActionCommand();
+		String arg1 = "Facil";
 
 		if (accion == volver.getActionCommand()){
 			setVisible(false);
@@ -126,9 +131,19 @@ public class Configraciones extends JPanel  implements ActionListener {
 		if( accion==aceptar.getActionCommand()){
 			valorx = (int)faspinnerx.getValue();
 			valory = (int)faspinnery.getValue();
-			f.getControl().getAjustes().cargarValores(valorx, valory);
+			f.getControl().getAjustes().setDificultad(arg1);
+			f.getControl().getAjustes().setValores(valorx, valory);
 			setVisible(false);
 			f.getpM().setVisible(true);
+		}
+		if (accion==facil.getActionCommand()) {
+			arg1 = "Facil";
+		}
+		if (accion==intermedio.getActionCommand()) {
+			arg1 = "Medio";
+		}
+		if (accion==dificil.getActionCommand()) {
+			arg1 = "Dificil";
 		}
 	}
 
@@ -139,5 +154,5 @@ public class Configraciones extends JPanel  implements ActionListener {
 	public int getValory() {
 		return valory;
 	}
-	
+
 }

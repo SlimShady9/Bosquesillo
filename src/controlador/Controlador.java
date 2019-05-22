@@ -16,19 +16,19 @@ public class Controlador{
 	private MuroDeTrump[] trump;
 	private int dimX, dimY;
 	private Ajustes ajustes;
-	
-	
+	private Carreta c;
+	private Meta mE;
+	private Checkpoint[] cH;
+
+
 	public Controlador() {
 
+		ajustes = new Ajustes();
 		p = new JFrameP(this);
-		ajustes = new Ajustes(p.getCof());
 		
 	}
-	public Ajustes getAjustes() {
-		return ajustes;
-		
-	}
-	public void iniciarComponentes() {
+
+	public void iniciarCompoJuego() {
 		System.out.println(ajustes.getDimX()+ " y "+ ajustes.getDimY());
 		dimX = ajustes.getDimX() * 30;
 		dimY = ajustes.getDimY() * 30;
@@ -37,19 +37,34 @@ public class Controlador{
 		iniciarTormentoso();
 		iniciarTablero();
 		iniciarMuroDeTrump();
+		iniciarCheckpoint();
+		iniciarCarreta();
+		iniciarMeta();
 	}
-	
-	private void iniciarMuroDeTrump() {
-		trump = new MuroDeTrump[5];
+
+	public void iniciarMeta() {
+		mE = new Meta(dimX, dimY);
+
+	}
+	public void iniciarCarreta() {
+		c = new Carreta(dimX, dimY);
+
+	}
+	public void iniciarCheckpoint() {
+		cH = new Checkpoint [ajustes.getcObjetos()];
+
+	}
+	public void iniciarMuroDeTrump() {
+		trump = new MuroDeTrump[ajustes.getcObjetos()];
 	}
 	public void iniciarBosquesillo () {
 		b = new Bosquesillo(dimX, dimY);
 	}
 	public void iniciarTormentoso(){
-		thor = new Tormentoso[5];
+		thor = new Tormentoso[ajustes.getcObjetos()];
 	}
 	public void iniciarMostruoL(){
-		mL = new MonstruoLetal[5];
+		mL = new MonstruoLetal[ajustes.getcObjetos()];
 	}
 	public void iniciarTablero() {
 		t = new Tablero();
@@ -73,11 +88,11 @@ public class Controlador{
 			r[i].setBounds(posX, posY, 30, 30);
 		}
 		return r;
-		}
+	}
 	public JLabel[] asignarMonstuoL(){
 		ImageIcon imagenML;
 		int posX, posY;
-		JLabel[] r = new JLabel[5];
+		JLabel[] r = new JLabel[ajustes.getcObjetos()];
 		for (int i = 0 ; i < r.length ; i++) {
 			mL[i] = new MonstruoLetal(dimX,dimY);
 			imagenML = mL[i].cargarImagen();
@@ -91,7 +106,7 @@ public class Controlador{
 	public JLabel[] asignarTrumps(){
 		ImageIcon imagenTrump;
 		int posX, posY ;
-		JLabel[] r = new JLabel[5];
+		JLabel[] r = new JLabel[ajustes.getcObjetos()];
 		for (int i = 0 ; i < r.length ; i++) {
 			trump[i] = new MuroDeTrump(dimX,dimY);
 			imagenTrump = trump[i].cargarImagen();
@@ -102,7 +117,7 @@ public class Controlador{
 		}
 		return r;
 	}	
-		
+
 	public JLabel[][] asignarTablero() {
 		ImageIcon imagenA = t.cargarImagenA();
 		ImageIcon imagenB = t.cargarImagenB();
@@ -123,7 +138,12 @@ public class Controlador{
 		}
 		return casillas;
 	}
-	
+
+
+	public Ajustes getAjustes() {
+		return ajustes;
+	}
+
 	public Point getBosque() {
 		return b.getUbicacion();
 	}
@@ -143,7 +163,7 @@ public class Controlador{
 	public int getDimY() {
 		return dimY;
 	}
-	
+
 	public void moverThors() {
 		for (int i = 0 ; i < thor.length ; i++) {
 			thor[i].setMoverse(true);
@@ -160,7 +180,7 @@ public class Controlador{
 				}
 			}
 			thor[i].moverse();
-			
+
 		}
 	}
 	public void moverLetales() {
@@ -179,7 +199,7 @@ public class Controlador{
 				}
 			}
 			mL[i].moverse();
-			
+
 		}
 	}
 
@@ -202,7 +222,7 @@ public class Controlador{
 			b.verificarObjs(trump[i].getUbicacion());
 		}
 		b.actualizar();
-		
+
 	}
 	public void moverIzquierda() {
 		moverThors();
@@ -213,7 +233,7 @@ public class Controlador{
 			b.verificarObjs(trump[i].getUbicacion());
 		}
 		b.actualizar();
-		
+
 	}
 	public void moverDerecha() {
 		moverThors();

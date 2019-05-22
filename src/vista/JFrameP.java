@@ -10,8 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import controlador.Ajustes;
 import controlador.Controlador;
+import modelo.Ajustes;
 
 public class JFrameP extends JFrame{
 	
