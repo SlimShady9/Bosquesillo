@@ -27,6 +27,7 @@ public class Configraciones extends JPanel  implements ActionListener {
 	private JButton volver, aceptar;
 	private JSpinner faspinnerx, faspinnery;
 	private int valorx, valory;
+	private String arg1;
 
 	public Configraciones(JFrameP f){
 		this.f = f;
@@ -121,7 +122,6 @@ public class Configraciones extends JPanel  implements ActionListener {
 	}
 	public void actionPerformed(ActionEvent arg0) {
 		String accion = arg0.getActionCommand();
-		String arg1 = "Facil";
 
 		if (accion == volver.getActionCommand()){
 			setVisible(false);
@@ -131,8 +131,8 @@ public class Configraciones extends JPanel  implements ActionListener {
 		if( accion==aceptar.getActionCommand()){
 			valorx = (int)faspinnerx.getValue();
 			valory = (int)faspinnery.getValue();
-			f.getControl().getAjustes().setDificultad(arg1);
 			f.getControl().getAjustes().setValores(valorx, valory);
+			f.getControl().getAjustes().setDificultad(arg1);
 			setVisible(false);
 			f.getpM().setVisible(true);
 		}

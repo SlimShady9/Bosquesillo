@@ -16,12 +16,15 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 	private JLabel trump[];
 	private JLabel tablero[][];
 	private Controlador c;
+	private JFrameP fr;
 	private JPanel esc;
-	public PanelPantallaJuego(Controlador co) {
+	public PanelPantallaJuego(JFrameP fr) {
 
+		this.fr = fr;
 		setLayout(null);
-		c = co;
-		c.iniciarComponentes();
+		c = fr.getControl();
+		c.iniciarCompoJuego();
+		iniciarObjetos();
 
 	}
 
@@ -44,9 +47,7 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 	}
 	public void cargarThor (){
 		thor = new JLabel[c.getAjustes().getcObjetos()];
-		System.out.println(thor.length);
 		JLabel[] eo = c.asignarThor();
-		System.out.println(eo.length);
 		for (int i = 0 ; i < thor.length ; i++) {
 			thor[i] = eo[i];
 			add(thor[i]);
@@ -60,7 +61,9 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 
 	public void cagarMonstruo(){
 		mLetal = new JLabel[c.getAjustes().getcObjetos()];
+		System.out.println(mLetal.length);
 		JLabel[] eo = c.asignarMonstuoL();
+		System.out.println(eo.length);
 		for (int i = 0; i < mLetal.length; i++) {
 			mLetal[i] = eo[i];
 			add(mLetal[i]);

@@ -49,7 +49,7 @@ public class JFrameP extends JFrame{
 	public void iniciarPanelPJuego() {
 		int posX = (570 -((cof.getValorx() * 30) ))/2;
 		int posY = (570 -((cof.getValory() * 30) ))/2;
-		pJ = new PanelPantallaJuego(c);
+		pJ = new PanelPantallaJuego(this);
 		pJ.setVisible(false);
 		pJ.setBounds(posX, posY, cof.getValorx() * 30, cof.getValory() * 30);
 		add(pJ);

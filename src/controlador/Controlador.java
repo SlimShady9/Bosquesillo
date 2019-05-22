@@ -29,7 +29,6 @@ public class Controlador{
 	}
 
 	public void iniciarCompoJuego() {
-		System.out.println(ajustes.getDimX()+ " y "+ ajustes.getDimY());
 		dimX = ajustes.getDimX() * 30;
 		dimY = ajustes.getDimY() * 30;
 		iniciarBosquesillo();
@@ -78,7 +77,7 @@ public class Controlador{
 	public JLabel[] asignarThor(){
 		ImageIcon imagenThor;
 		int posX, posY;
-		JLabel[] r = new JLabel[5];
+		JLabel[] r = new JLabel[ajustes.getcObjetos()];
 		for (int i = 0 ; i < r.length ; i++) {
 			thor[i] = new Tormentoso(dimX,dimY);
 			imagenThor = thor[i].cargarImagen();
