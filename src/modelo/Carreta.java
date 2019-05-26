@@ -28,9 +28,11 @@ public class Carreta {
 		}
 		ubicacion = new Point(posX, posY);
 		for (int i = 0  ; i < posObj.length ; i++) {
-			if (posObj[i].equals(ubicacion)) {
-				ubicacion = null;
-				iniciarPosicion(posObj);
+			if(posObj[i] != null) {
+				if (ubicacion.equals(posObj[i])) {
+					ubicacion = null;
+					iniciarPosicion(posObj);
+				}
 			}
 		}
 	}
