@@ -17,7 +17,6 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 	private JLabel tablero[][];
 	private Controlador c;
 	private JFrameP fr;
-	private JPanel esc;
 	public PanelPantallaJuego(JFrameP fr) {
 
 		this.fr = fr;
@@ -61,9 +60,7 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 
 	public void cagarMonstruo(){
 		mLetal = new JLabel[c.getAjustes().getcObjetos()];
-		System.out.println(mLetal.length);
 		JLabel[] eo = c.asignarMonstuoL();
-		System.out.println(eo.length);
 		for (int i = 0; i < mLetal.length; i++) {
 			mLetal[i] = eo[i];
 			add(mLetal[i]);
@@ -133,10 +130,17 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 
 		}
 		if( key ==  KeyEvent.VK_ESCAPE) {
-			
+			setEnabled(false);
+			botonB.setEnabled(false);
+			fr.getEsc().setVisible(true);
 		}
 
 	}
+	
+	public JButton getBosquesillo() {
+		return botonB;
+	}
+
 
 
 	@Override

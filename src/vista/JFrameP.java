@@ -21,13 +21,14 @@ public class JFrameP extends JFrame{
 	private PanelMenu pM;
 	private Controlador c;
 	private Configraciones cof;
+	private Esc esc;
 	
 	public JFrameP(Controlador co){
 		super("Juego");
 		c = co;
 		setBackground(Color.BLACK);
 		setLayout(null);
-		setSize(600, 600);
+		setSize(610, 630);
 		setResizable(true);
 		setVisible(true);
 		iniciarPaneles();
@@ -38,17 +39,22 @@ public class JFrameP extends JFrame{
 	public void iniciarPaneles(){
 		pM = new PanelMenu(this);
 		pM.setVisible(true);
-		pM.setBounds(0 ,0 , 600, 600);
+		pM.setBounds(0 ,0 , 610, 630);
 		add(pM);
 		cof = new Configraciones(this);
 		cof.setVisible(false);
-		cof.setBounds(0, 0, 600, 600);
+		cof.setBounds(0, 0, 610, 630);
 		add(cof);
+		esc = new Esc(this);
+		esc.setVisible(false);
+		esc.setBounds(100, 100, 250, 300);
+		add(esc);
+		
 	}
 	
 	public void iniciarPanelPJuego() {
-		int posX = (570 -((cof.getValorx() * 30) ))/2;
-		int posY = (570 -((cof.getValory() * 30) ))/2;
+		int posX = (600 -((cof.getValorx() * 30) ))/2;
+		int posY = (600 -((cof.getValory() * 30) ))/2;
 		pJ = new PanelPantallaJuego(this);
 		pJ.setVisible(false);
 		pJ.setBounds(posX, posY, cof.getValorx() * 30, cof.getValory() * 30);
@@ -60,12 +66,19 @@ public class JFrameP extends JFrame{
 		return pJ;
 	}
 
+	public void setpJ(PanelPantallaJuego pJ) {
+		this.pJ = pJ;
+	}
+
 	public PanelFinal getpF() {
 		return pF;
 	}
 
 	public PanelMenu getpM() {
 		return pM;
+	}
+	public Esc getEsc() {
+		return esc;
 	}
 
 	public Configraciones getCof() {

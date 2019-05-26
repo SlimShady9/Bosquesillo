@@ -15,10 +15,9 @@ public class Meta {
 
 		maxX = x;
 		maxY = y;
-		iniciarPosicion();
 	}
 
-	public void iniciarPosicion(){
+	public void iniciarPosicion(Point posObj){
 		int posX = ThreadLocalRandom.current().nextInt(0 , maxX );
 		int posY = ThreadLocalRandom.current().nextInt(0 , maxY );
 		while (posX % 30 != 0){
@@ -28,6 +27,10 @@ public class Meta {
 			posY --;
 		}
 		ubicacion = new Point(posX, posY);
+		if (ubicacion.equals(posObj)) {
+			ubicacion = null;
+			iniciarPosicion(posObj);
+		}
 	}
 	public ImageIcon cargarImagen(){
 		imagen = new ImageIcon("Data/Meta.png");

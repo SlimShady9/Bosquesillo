@@ -1,5 +1,8 @@
 package vista;
 
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
@@ -9,13 +12,17 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Esc extends JPanel  implements ActionListener{
-	private JPanel esc;
 	private JButton resume , exit;
-	public JFrameP p;
-	public PanelPantallaJuego pa;
+	private JFrameP fr;
 
-	public Esc(JFrameP p) {
+	public Esc(JFrameP fr) {
+		this.fr = fr;
+		setLayout(new FlowLayout());
+		setBackground(Color.yellow);
 		botones();
+		
+
+		
 	}
 	public void botones() {
 		resume = new JButton("resume");
@@ -33,15 +40,15 @@ public class Esc extends JPanel  implements ActionListener{
 
 		if (accion == resume.getActionCommand()){
 			setVisible(false);
-			pa.setEnabled(true);
+			fr.getpJ().getBosquesillo().setEnabled(true);
 		}
 		if(accion == exit.getActionCommand()) {
 			setVisible(false);
-			pa.setVisible(false);
-			p.getpM().setVisible(true);
+			fr.getpJ().setVisible(false);
+			fr.setpJ(null);
+			fr.getpM().setVisible(true);
+			
 		}
-
-
 	}
 
 }

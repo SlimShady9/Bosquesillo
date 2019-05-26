@@ -20,16 +20,13 @@ public class Ajustes {
 	public void setDificultad(String pDificultad) {
 		if (pDificultad.contentEquals("Facil")) {
 			cObjetos= (dimX*dimY)/(dimX+dimY); 
-			System.out.println(cObjetos);
 		}
 		if (pDificultad.contentEquals("Medio")) {
-			cObjetos= (dimX*dimY*2)/(dimX+dimY) ;
-			System.out.println(cObjetos);
+			cObjetos= (dimX*dimY*2)/(dimX+dimY);
 
 		}
 		if (pDificultad.contentEquals("Dificil")) {
-			cObjetos= (dimX*dimY*3)/(dimX+dimY) ;
-			System.out.println(cObjetos);
+			cObjetos= (dimX*dimY*3)/(dimX+dimY);
 
 		}
 	}

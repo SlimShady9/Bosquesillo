@@ -14,10 +14,9 @@ public class Checkpoint {
 
 		maxX = x;
 		maxY = y;
-		iniciarPosicion();
 	}
 
-	public void iniciarPosicion(){
+	public void iniciarPosicion(Point[] posObj){
 		int posX = ThreadLocalRandom.current().nextInt(0 , maxX );
 		int posY = ThreadLocalRandom.current().nextInt(0 , maxY );
 		while (posX % 30 != 0){
@@ -27,6 +26,12 @@ public class Checkpoint {
 			posY --;
 		}
 		ubicacion = new Point(posX, posY);
+		for (int i = 0  ; i < posObj.length ; i++) {
+			if (posObj[i].equals(ubicacion)) {
+				ubicacion = null;
+				iniciarPosicion(posObj);
+			}
+		}
 	}
 	public ImageIcon cargarImagen(){
 		imagen = new ImageIcon("Data/Check.png");

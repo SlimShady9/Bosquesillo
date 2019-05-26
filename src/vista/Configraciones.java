@@ -11,6 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
@@ -33,6 +34,7 @@ public class Configraciones extends JPanel  implements ActionListener {
 		this.f = f;
 		valorx = 15;
 		valory = 15;
+		arg1 = "Medio";
 		setLayout(null);
 		setSize(600, 600);
 		setBackground(Color.getHSBColor(100, 100, 100));
@@ -95,10 +97,14 @@ public class Configraciones extends JPanel  implements ActionListener {
 
 	}
 	public void cargarSpinners(){
-		SpinnerModel fa = new SpinnerNumberModel(5,5,20,1);
-		SpinnerModel fay = new SpinnerNumberModel(5,5,20,1);
+		SpinnerModel fa = new SpinnerNumberModel(15,5,20,1);
+		SpinnerModel fay = new SpinnerNumberModel(15,5,20,1);
 		faspinnerx = new JSpinner(fa);
 		faspinnery = new JSpinner(fay);
+		JFormattedTextField tfx = ((JSpinner.DefaultEditor) faspinnerx.getEditor()).getTextField();
+		JFormattedTextField tfy = ((JSpinner.DefaultEditor) faspinnery.getEditor()).getTextField();
+		tfx.setEditable(false);
+		tfy.setEditable(false);
 		add(faspinnery);
 		add(faspinnerx);
 		faspinnerx.setBounds(500, 160, 50, 50);
@@ -110,14 +116,14 @@ public class Configraciones extends JPanel  implements ActionListener {
 		volver.addActionListener(this);
 		volver.setBackground(Color.DARK_GRAY);
 		volver.setFont(new Font("Book Antiqua", Font.ITALIC, 38));
-		volver.setBounds(20, 500, 190, 50);
+		volver.setBounds(30, 500, 190, 50);
 		add(volver);
 
 		aceptar = new JButton("Aceptar");
 		aceptar.addActionListener(this);
 		aceptar.setBackground(Color.DARK_GRAY);
 		aceptar.setFont(new Font("Book Antiqua", Font.ITALIC, 38));
-		aceptar.setBounds(400, 500 , 190, 50);
+		aceptar.setBounds(380, 500 , 190, 50);
 		add(aceptar);
 	}
 	public void actionPerformed(ActionEvent arg0) {

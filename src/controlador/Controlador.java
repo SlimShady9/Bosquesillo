@@ -15,6 +15,8 @@ public class Controlador{
 	private Tormentoso[] thor;
 	private MuroDeTrump[] trump;
 	private int dimX, dimY;
+	private Point[] disponibilidad;
+	private int posicion;
 	private Ajustes ajustes;
 	private Carreta c;
 	private Meta mE;
@@ -25,16 +27,22 @@ public class Controlador{
 
 		ajustes = new Ajustes();
 		p = new JFrameP(this);
-		
+
 	}
 
 	public void iniciarCompoJuego() {
 		dimX = ajustes.getDimX() * 30;
 		dimY = ajustes.getDimY() * 30;
+		iniciarComponentes();
+	}
+	
+	public void iniciarComponentes() {
+		disponibilidad = new Point[ajustes.getDimX() * ajustes.getDimY()];
+		posicion = 0;
+		iniciarTablero();
 		iniciarBosquesillo();
 		iniciarMostruoL();
 		iniciarTormentoso();
-		iniciarTablero();
 		iniciarMuroDeTrump();
 		iniciarCheckpoint();
 		iniciarCarreta();
@@ -51,19 +59,45 @@ public class Controlador{
 	}
 	public void iniciarCheckpoint() {
 		cH = new Checkpoint [ajustes.getcObjetos()];
+		for (int i = 0 ; i < cH.length ; i++) {
+			cH[i] = new Checkpoint(dimX, dimY);
+			cH[i].iniciarPosicion(disponibilidad);
+			disponibilidad[posicion]  = cH[i].getUbicacion();
+			posicion++;
+		}
 
 	}
 	public void iniciarMuroDeTrump() {
 		trump = new MuroDeTrump[ajustes.getcObjetos()];
+		for (int i = 0 ; i < trump.length ; i++) {
+			trump[i] = new MuroDeTrump(dimX, dimY);
+			trump[i].iniciarPosicion(disponibilidad);
+			disponibilidad[posicion] = trump[i].getUbicacion();
+			posicion++;
+		}
 	}
 	public void iniciarBosquesillo () {
 		b = new Bosquesillo(dimX, dimY);
+		disponibilidad[posicion] = b.getUbicacion();
+		posicion++;
 	}
 	public void iniciarTormentoso(){
 		thor = new Tormentoso[ajustes.getcObjetos()];
+		for (int i = 0 ; i < thor.length ; i++) {
+			thor[i] = new Tormentoso(dimX, dimY);
+			thor[i].iniciarPosicion(disponibilidad);
+			disponibilidad[posicion]  = thor[i].getUbicacion();
+			posicion++;
+		}
 	}
 	public void iniciarMostruoL(){
 		mL = new MonstruoLetal[ajustes.getcObjetos()];
+		for (int i = 0 ; i < mL.length ; i++) {
+			mL[i] = new MonstruoLetal(dimX, dimY);
+			mL[i].iniciarPosicion(disponibilidad);
+			disponibilidad[posicion] = mL[i].getUbicacion();
+			posicion++;
+		}
 	}
 	public void iniciarTablero() {
 		t = new Tablero();
@@ -79,7 +113,6 @@ public class Controlador{
 		int posX, posY;
 		JLabel[] r = new JLabel[ajustes.getcObjetos()];
 		for (int i = 0 ; i < r.length ; i++) {
-			thor[i] = new Tormentoso(dimX,dimY);
 			imagenThor = thor[i].cargarImagen();
 			r[i] = new JLabel(imagenThor);
 			posX = (int) thor[i].getUbicacion().getX();
@@ -93,7 +126,6 @@ public class Controlador{
 		int posX, posY;
 		JLabel[] r = new JLabel[ajustes.getcObjetos()];
 		for (int i = 0 ; i < r.length ; i++) {
-			mL[i] = new MonstruoLetal(dimX,dimY);
 			imagenML = mL[i].cargarImagen();
 			r[i] = new JLabel(imagenML);
 			posX = (int) mL[i].getUbicacion().getX();
@@ -107,7 +139,6 @@ public class Controlador{
 		int posX, posY ;
 		JLabel[] r = new JLabel[ajustes.getcObjetos()];
 		for (int i = 0 ; i < r.length ; i++) {
-			trump[i] = new MuroDeTrump(dimX,dimY);
 			imagenTrump = trump[i].cargarImagen();
 			r[i] = new JLabel(imagenTrump);
 			posX = (int)trump[i].getUbicacion().getX();
