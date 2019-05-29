@@ -53,13 +53,13 @@ public class Bosquesillo {
 		if (ubicacion.getX() + 30 == obj.getX() && ubicacion.getY() == obj.getY()) {
 			moverDerecha = false;
 		}
-		if (ubicacion.getX() - 30 == obj.getX() && ubicacion.getY() == obj.getY()) {
+		if (ubicacion.getX() == obj.getX() + 30 && ubicacion.getY() == obj.getY()) {
 			moverIzquierda = false;
 		}
 		if (ubicacion.getY() + 30 == obj.getY() && ubicacion.getX() == obj.getX()) {
 			moverAbajo = false;
 		}
-		if (ubicacion.getY() - 30 == obj.getY() && ubicacion.getX() == obj.getX()) {
+		if (ubicacion.getY() == obj.getY() + 30 && ubicacion.getX() == obj.getX()) {
 			moverArriba = false;
 		}
 	}

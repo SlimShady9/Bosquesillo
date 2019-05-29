@@ -69,27 +69,36 @@ public class PanelFinJuego extends JPanel  implements ActionListener {
 		volver.addActionListener(this);
 		volver.setBackground(Color.RED);
 		volver.setFont(new Font("Book Antiqua", Font.ITALIC, 18));
-		volver.setBounds(30, 400, 200, 50);
+		volver.setBounds(30, 500, 200, 50);
 		add(volver);
 
 		aceptar = new JButton("Ir a menu principal");
 		aceptar.addActionListener(this);
 		aceptar.setBackground(Color.RED);
 		aceptar.setFont(new Font("Book Antiqua", Font.ITALIC, 18));
-		aceptar.setBounds(235, 400 , 210, 50);
+		aceptar.setBounds(235, 500 , 210, 50);
 		add(aceptar);
 	
 		salir = new JButton("Salir");
 		salir.addActionListener(this);
 		salir.setBackground(Color.RED);
 		salir.setFont(new Font("Book Antiqua", Font.ITALIC, 18));
-		salir.setBounds(450, 400 , 105, 50);
+		salir.setBounds(450, 500 , 105, 50);
 		add(salir);
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent arg0) {
 		
+		String accion = arg0.getActionCommand();
+
+		if (accion == aceptar.getActionCommand()){
+			setVisible(false);
+			f.getpM().setVisible(true);
+
+		
+		
+
+		}
 	}
 }

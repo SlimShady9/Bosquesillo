@@ -18,7 +18,7 @@ public class Controlador{
 	private Point[] disponibilidad;
 	private int posicion;
 	private Ajustes ajustes;
-	private Carreta c;
+	private Carreta carro;
 	private Meta mE;
 	private Checkpoint[] cH;
 
@@ -51,11 +51,12 @@ public class Controlador{
 
 	public void iniciarMeta() {
 		mE = new Meta(dimX, dimY);
-
 	}
 	public void iniciarCarreta() {
-		c = new Carreta(dimX, dimY);
-
+		carro = new Carreta(dimX, dimY);
+		carro.iniciarPosicion(disponibilidad);
+		disponibilidad[posicion] = carro.getUbicacion();
+		posicion++;
 	}
 	public void iniciarCheckpoint() {
 		cH = new Checkpoint [ajustes.getcObjetos()];
@@ -133,6 +134,12 @@ public class Controlador{
 		r.setBounds((int) b.getUbicacion().getX(), (int) b.getUbicacion().getY(), 30, 30);
 		return r;
 	}
+	public JLabel asignarCarrito() {
+		ImageIcon imagenCarro = carro.cargarImagen();
+		JLabel r = new JLabel(imagenCarro);
+		r.setBounds((int) carro.getUbicacion().getX(), (int) carro.getUbicacion().getY(), 30, 30);
+		return r;
+	}
 	public JLabel[] asignarThor(){
 		ImageIcon imagenThor;
 		int posX, posY;
@@ -202,6 +209,9 @@ public class Controlador{
 	public Point getBosque() {
 		return b.getUbicacion();
 	}
+	public Point getCarro() {
+		return carro.getUbicacion();
+	}
 
 	public Point getMLetal(int indice){
 		return mL[indice].getUbicacion();
@@ -219,10 +229,12 @@ public class Controlador{
 		return dimY;
 	}
 
+
 	public void moverThors() {
 		for (int i = 0 ; i < thor.length ; i++) {
 			thor[i].setMoverse(true);
 			thor[i].verificarMuros();
+			thor[i].verificarObjs(b.getUbicacion());
 			for (int j = 0 ; j < trump.length ; j++ ) {
 				thor[i].verificarObjs(trump[j].getUbicacion());
 			}
@@ -238,10 +250,26 @@ public class Controlador{
 
 		}
 	}
+	public void moverCarro() {
+		carro.verificarBosque(b.getUbicacion());
+		carro.verificarMuros();
+		for (int j = 0 ; j < trump.length ; j++) {
+			carro.verificarObjs(trump[j].getUbicacion());
+		}
+		for (int k = 0 ; k < thor.length ; k++) {
+			carro.verificarObjs(thor[k].getUbicacion());
+		}
+		for (int l = 0 ; l < mL.length ; l++) {
+			carro.verificarObjs(mL[l].getUbicacion());
+
+		}
+		carro.actualizar();
+	}
 	public void moverLetales() {
 		for (int i = 0 ; i < mL.length ; i++) {
 			mL[i].setMoverse(true);
 			mL[i].verificarMuros();
+			mL[i].verificarObjs(b.getUbicacion());
 			for (int j = 0 ; j < trump.length ; j++) {
 				mL[i].verificarObjs(trump[j].getUbicacion());
 			}
@@ -259,7 +287,7 @@ public class Controlador{
 	}
 
 	public void moverArriba() {
-		
+
 		b.setMoverArriba(true);
 		b.verificarMuros();
 		b.setContador(b.getContador() - 1);
@@ -268,20 +296,22 @@ public class Controlador{
 		}
 		for (int i = 0 ; i < thor.length ; i++) {
 			if (b.colision(thor[i].getUbicacion())) {
-				System.out.println("ouch thor!");
+				int reduccion = (int)((ajustes.getDimX() * ajustes.getDimY())/ 100);
+				b.setContador(b.getContador() - reduccion);
 			}
 		}
 		for (int i = 0 ; i < mL.length ; i++) {
 			if (b.colision(mL[i].getUbicacion())){
-				System.out.println("Ouch letal!");
+				b.setContador(0);
 			}
 		}
+		moverCarro();
 		b.actualizar();
 		moverThors();
 		moverLetales();
 	}
 	public void moverAbajo() {
-		
+
 		b.setMoverAbajo(true);
 		b.verificarMuros();
 		b.setContador(b.getContador() - 1);
@@ -290,20 +320,22 @@ public class Controlador{
 		}
 		for (int i = 0 ; i < thor.length ; i++) {
 			if (b.colision(thor[i].getUbicacion())) {
-				System.out.println("ouch thor!");
+				int reduccion = (int)((ajustes.getDimX() * ajustes.getDimY())/ 100);
+				b.setContador(b.getContador() - reduccion);
 			}
 		}
 		for (int i = 0 ; i < mL.length ; i++) {
 			if (b.colision(mL[i].getUbicacion())){
-				System.out.println("Ouch letal!");
+				b.setContador(0);
 			}
 		}
+		moverCarro();
 		b.actualizar();
 		moverThors();
 		moverLetales();
 	}
 	public void moverIzquierda() {
-		
+
 		b.setMoverIzquierda(true);
 		b.verificarMuros();
 		b.setContador(b.getContador() - 1);
@@ -312,20 +344,22 @@ public class Controlador{
 		}
 		for (int i = 0 ; i < thor.length ; i++) {
 			if (b.colision(thor[i].getUbicacion())) {
-				System.out.println("ouch thor!");
+				int reduccion = (int)((ajustes.getDimX() * ajustes.getDimY())/ 100);
+				b.setContador(b.getContador() - reduccion);
 			}
 		}
 		for (int i = 0 ; i < mL.length ; i++) {
 			if (b.colision(mL[i].getUbicacion())){
-				System.out.println("Ouch letal!");
+				b.setContador(0);
 			}
 		}
+		moverCarro();
 		b.actualizar();
 		moverThors();
 		moverLetales();
 	}
 	public void moverDerecha() {
-		
+
 		b.setMoverDerecha(true);
 		b.verificarMuros();
 		b.setContador(b.getContador() - 1);
@@ -334,7 +368,8 @@ public class Controlador{
 		}
 		for (int i = 0 ; i < thor.length ; i++) {
 			if (b.colision(thor[i].getUbicacion())) {
-				
+				int reduccion = (int)((ajustes.getDimX() * ajustes.getDimY())/ 100);
+				b.setContador(b.getContador() - reduccion);
 			}
 		}
 		for (int i = 0 ; i < mL.length ; i++) {
@@ -342,11 +377,21 @@ public class Controlador{
 				b.setContador(0);
 			}
 		}
+		moverCarro();
 		b.actualizar();
 		moverThors();
 		moverLetales();
 	}
-	
+	public boolean verificarMuerte() {
+		boolean estaMuerto ;
+		if (b.getContador() <= 0) {
+			estaMuerto = true;
+		}
+		else {
+			estaMuerto = false;
+		}
+		return estaMuerto;
+	}
 	public int getPuntaje() {
 		return b.getContador();
 	}

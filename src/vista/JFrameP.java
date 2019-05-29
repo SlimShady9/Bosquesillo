@@ -8,16 +8,17 @@ public class JFrameP extends JFrame{
 	
 	
 	private PanelPantallaJuego pJ;
-	private PanelFinal pF;
+	private PanelFinJuego pF;
 	private PanelMenu pM;
 	private Controlador c;
-	private Configraciones cof;
+	private Configuraciones cof;
+	private PanelInstrucciones pI;
 	private Esc esc;
 	private PanelPuntaje puntaje;
 
 	
 	public JFrameP(Controlador co){
-		super("Juego");
+		super("Bosquecillo");
 		c = co;
 		setBackground(Color.BLACK);
 		setLayout(null);
@@ -35,17 +36,22 @@ public class JFrameP extends JFrame{
 		pM.setVisible(true);
 		pM.setBounds(0 ,0 , 610, 630);
 		add(pM);
-		cof = new Configraciones(this);
+		cof = new Configuraciones(this);
 		cof.setVisible(false);
 		cof.setBounds(0, 0, 610, 630);
 		add(cof);
+		pI = new PanelInstrucciones(this);
+		pI.setVisible(false);
+		pI.setBounds(0, 0, 610, 630);
+		add(pI);
 		esc = new Esc(this);
 		esc.setVisible(false);
 		esc.setBounds(100, 100, 250, 300);
 		add(esc);
-		
-
-		
+		pF = new PanelFinJuego(this);
+		pF.setBounds(0, 0, 610, 630);
+		pF.setVisible(false);
+		add(pF);
 	}
 	public void iniciarPuntaje() {
 		puntaje  = new PanelPuntaje(this);
@@ -74,7 +80,7 @@ public class JFrameP extends JFrame{
 		this.pJ = pJ;
 	}
 
-	public PanelFinal getpF() {
+	public PanelFinJuego getpF() {
 		return pF;
 	}
 
@@ -85,9 +91,14 @@ public class JFrameP extends JFrame{
 		return esc;
 	}
 
-	public Configraciones getCof() {
+	public Configuraciones getCof() {
 		return cof;
 	}
+	
+	public PanelInstrucciones getpI() {
+		return pI;
+	}
+
 	public Controlador getControl() {
 		return c;
 	}
