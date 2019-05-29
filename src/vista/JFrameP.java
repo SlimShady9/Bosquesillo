@@ -1,17 +1,8 @@
 package vista;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-
 import controlador.Controlador;
-import modelo.Ajustes;
 
 public class JFrameP extends JFrame{
 	
@@ -22,6 +13,8 @@ public class JFrameP extends JFrame{
 	private Controlador c;
 	private Configraciones cof;
 	private Esc esc;
+	private PanelPuntaje puntaje;
+
 	
 	public JFrameP(Controlador co){
 		super("Juego");
@@ -29,7 +22,8 @@ public class JFrameP extends JFrame{
 		setBackground(Color.BLACK);
 		setLayout(null);
 		setSize(610, 630);
-		setResizable(true);
+		setLocation(0, 0);
+		setResizable(false);
 		setVisible(true);
 		iniciarPaneles();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -50,8 +44,14 @@ public class JFrameP extends JFrame{
 		esc.setBounds(100, 100, 250, 300);
 		add(esc);
 		
+
+		
 	}
-	
+	public void iniciarPuntaje() {
+		puntaje  = new PanelPuntaje(this);
+		puntaje.setVisible(true);
+		puntaje.setLocation(630, 310);
+	}
 	public void iniciarPanelPJuego() {
 		int posX = (600 -((cof.getValorx() * 30) ))/2;
 		int posY = (600 -((cof.getValory() * 30) ))/2;
@@ -64,6 +64,10 @@ public class JFrameP extends JFrame{
 
 	public PanelPantallaJuego getpJ() {
 		return pJ;
+	}
+
+	public PanelPuntaje getPuntaje() {
+		return puntaje;
 	}
 
 	public void setpJ(PanelPantallaJuego pJ) {

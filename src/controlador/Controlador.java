@@ -35,7 +35,7 @@ public class Controlador{
 		dimY = ajustes.getDimY() * 30;
 		iniciarComponentes();
 	}
-	
+
 	public void iniciarComponentes() {
 		disponibilidad = new Point[ajustes.getDimX() * ajustes.getDimY()];
 		posicion = 0;
@@ -80,6 +80,31 @@ public class Controlador{
 		b = new Bosquesillo(dimX, dimY);
 		disponibilidad[posicion] = b.getUbicacion();
 		posicion++;
+		if (b.getUbicacion().getX() + 30 <= dimX) {
+			Point savePoint = new Point((int)b.getUbicacion().getX() + 30 , (int)b.getUbicacion().getY());
+			disponibilidad[posicion] = savePoint;
+			posicion++;
+			savePoint = null;
+		}
+		if (b.getUbicacion().getX() - 30 >= 0)  {
+			Point savePoint = new Point((int)b.getUbicacion().getX() - 30 , (int)b.getUbicacion().getY());
+			disponibilidad[posicion] = savePoint;
+			posicion++;
+			savePoint = null;
+		}
+		if (b.getUbicacion().getY() + 30 <= dimY) {
+			Point savePoint = new Point((int)b.getUbicacion().getX() , (int)b.getUbicacion().getY() + 30);
+			disponibilidad[posicion] = savePoint;
+			posicion++;
+			savePoint = null;
+		}
+		if (b.getUbicacion().getY() - 30 >= 0) {
+			Point savePoint = new Point((int)b.getUbicacion().getX() , (int)b.getUbicacion().getY() - 30);
+			disponibilidad[posicion] = savePoint;
+			posicion++;
+			savePoint = null;
+		}
+
 	}
 	public void iniciarTormentoso(){
 		thor = new Tormentoso[ajustes.getcObjetos()];
@@ -234,45 +259,95 @@ public class Controlador{
 	}
 
 	public void moverArriba() {
-		moverThors();
-		moverLetales();
+		
 		b.setMoverArriba(true);
 		b.verificarMuros();
+		b.setContador(b.getContador() - 1);
 		for (int i = 0 ; i < trump.length ; i++) {
 			b.verificarObjs(trump[i].getUbicacion());
 		}
+		for (int i = 0 ; i < thor.length ; i++) {
+			if (b.colision(thor[i].getUbicacion())) {
+				System.out.println("ouch thor!");
+			}
+		}
+		for (int i = 0 ; i < mL.length ; i++) {
+			if (b.colision(mL[i].getUbicacion())){
+				System.out.println("Ouch letal!");
+			}
+		}
 		b.actualizar();
+		moverThors();
+		moverLetales();
 	}
 	public void moverAbajo() {
-		moverThors();
-		moverLetales();
+		
 		b.setMoverAbajo(true);
 		b.verificarMuros();
+		b.setContador(b.getContador() - 1);
 		for (int i = 0 ; i < trump.length ; i++) {
 			b.verificarObjs(trump[i].getUbicacion());
 		}
+		for (int i = 0 ; i < thor.length ; i++) {
+			if (b.colision(thor[i].getUbicacion())) {
+				System.out.println("ouch thor!");
+			}
+		}
+		for (int i = 0 ; i < mL.length ; i++) {
+			if (b.colision(mL[i].getUbicacion())){
+				System.out.println("Ouch letal!");
+			}
+		}
 		b.actualizar();
-
+		moverThors();
+		moverLetales();
 	}
 	public void moverIzquierda() {
-		moverThors();
-		moverLetales();
+		
 		b.setMoverIzquierda(true);
 		b.verificarMuros();
+		b.setContador(b.getContador() - 1);
 		for (int i = 0 ; i < trump.length ; i++) {
 			b.verificarObjs(trump[i].getUbicacion());
 		}
+		for (int i = 0 ; i < thor.length ; i++) {
+			if (b.colision(thor[i].getUbicacion())) {
+				System.out.println("ouch thor!");
+			}
+		}
+		for (int i = 0 ; i < mL.length ; i++) {
+			if (b.colision(mL[i].getUbicacion())){
+				System.out.println("Ouch letal!");
+			}
+		}
 		b.actualizar();
-
-	}
-	public void moverDerecha() {
 		moverThors();
 		moverLetales();
+	}
+	public void moverDerecha() {
+		
 		b.setMoverDerecha(true);
 		b.verificarMuros();
+		b.setContador(b.getContador() - 1);
 		for (int i = 0 ; i < trump.length ; i++) {
 			b.verificarObjs(trump[i].getUbicacion());
 		}
+		for (int i = 0 ; i < thor.length ; i++) {
+			if (b.colision(thor[i].getUbicacion())) {
+				
+			}
+		}
+		for (int i = 0 ; i < mL.length ; i++) {
+			if (b.colision(mL[i].getUbicacion())){
+				b.setContador(0);
+			}
+		}
 		b.actualizar();
+		moverThors();
+		moverLetales();
+	}
+	
+	public int getPuntaje() {
+		return b.getContador();
 	}
 }

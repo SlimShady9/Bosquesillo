@@ -9,6 +9,7 @@ public class Bosquesillo {
 	private Point ubicacion;
 	private ImageIcon imagen;
 	private boolean moverArriba, moverAbajo, moverIzquierda, moverDerecha;
+	private int contador;
 
 	public Bosquesillo(int x, int y){
 		moverArriba = false;
@@ -17,6 +18,7 @@ public class Bosquesillo {
 		moverDerecha = false;
 		maxX = x;
 		maxY = y;
+		contador = (maxX * maxY) / 900;
 		posInicial();
 	}
 	public void posInicial(){
@@ -90,21 +92,45 @@ public class Bosquesillo {
 			ubicacion.setLocation(x, ubicacion.getY());
 			moverDerecha = false;
 		}
-
 	}
 
+	public boolean colision(Point obj) {
+		boolean pego = false;
+		if (ubicacion.getX() + 30 == obj.getX() && ubicacion.getY() == obj.getY()) {
+			pego = true;
+		}
+		if (ubicacion.getX() - 30 == obj.getX() && ubicacion.getY() == obj.getY()) {
+			pego = true;
+		}
+		if (ubicacion.getY() + 30 == obj.getY() && ubicacion.getX() == obj.getX()) {
+			pego = true;
+		}
+		if (ubicacion.getY() - 30 == obj.getY() && ubicacion.getX() == obj.getX()) {
+			pego = true;
+		}
+		return pego;
+	}
+	public int getContador() {
+		return contador;
+	}
 	public Point getUbicacion() {
 		return ubicacion;
+	}
+	public void setContador(int contador) {
+		this.contador = contador;
 	}
 	public void setMoverArriba(boolean moverArriba) {
 		this.moverArriba = moverArriba;
 	}
+	
 	public void setMoverAbajo(boolean moverAbajo) {
 		this.moverAbajo = moverAbajo;
 	}
+	
 	public void setMoverIzquierda(boolean moverIzquierda) {
 		this.moverIzquierda = moverIzquierda;
 	}
+	
 	public void setMoverDerecha(boolean moverDerecha) {
 		this.moverDerecha = moverDerecha;
 	}

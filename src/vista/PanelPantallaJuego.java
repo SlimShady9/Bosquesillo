@@ -17,6 +17,7 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 	private JLabel tablero[][];
 	private Controlador c;
 	private JFrameP fr;
+	
 	public PanelPantallaJuego(JFrameP fr) {
 
 		this.fr = fr;
@@ -105,28 +106,36 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 		int key = arg0.getKeyCode();
 		if (key == KeyEvent.VK_UP) {
 			c.moverArriba();
-			actualizarPBosquesillo();
+			fr.getPuntaje().actiulizar();
 			actualizarPMLetales();
 			actualizarPThores();
+			actualizarPBosquesillo();
+			
 
 		}
 		if (key == KeyEvent.VK_DOWN) {
 			c.moverAbajo();
-			actualizarPBosquesillo();
+			fr.getPuntaje().actiulizar();
 			actualizarPMLetales();
 			actualizarPThores();
+			actualizarPBosquesillo();
+			
 		}
 		if (key == KeyEvent.VK_LEFT) {
 			c.moverIzquierda();
-			actualizarPBosquesillo();
+			fr.getPuntaje().actiulizar();
 			actualizarPMLetales();
 			actualizarPThores();
+			actualizarPBosquesillo();
+			
 		}
 		if (key == KeyEvent.VK_RIGHT) {
 			c.moverDerecha();
-			actualizarPBosquesillo();
+			fr.getPuntaje().actiulizar();
 			actualizarPMLetales();
 			actualizarPThores();
+			actualizarPBosquesillo();
+			
 
 		}
 		if( key ==  KeyEvent.VK_ESCAPE) {
