@@ -46,7 +46,7 @@ public class JFrameP extends JFrame{
 		add(pI);
 		esc = new Esc(this);
 		esc.setVisible(false);
-		esc.setBounds(100, 100, 250, 300);
+		esc.setBounds(100, 100, 400, 300);
 		add(esc);
 		pF = new PanelFinJuego(this);
 		pF.setBounds(0, 0, 610, 630);

@@ -270,6 +270,7 @@ public class Controlador{
 			mL[i].setMoverse(true);
 			mL[i].verificarMuros();
 			mL[i].verificarObjs(b.getUbicacion());
+			mL[i].verificarObjs(carro.getUbicacion());
 			for (int j = 0 ; j < trump.length ; j++) {
 				mL[i].verificarObjs(trump[j].getUbicacion());
 			}

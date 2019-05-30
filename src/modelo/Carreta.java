@@ -40,16 +40,36 @@ public class Carreta {
 	public void verificarBosque(Point obj) {
 
 		if (ubicacion.getX() == obj.getX() + 30 && ubicacion.getY() == obj.getY()) {
-			moverDerecha = true;
+			if (ubicacion.getX() + 30 == maxX) {
+				ubicacion.setLocation(ubicacion.getX() - 30, ubicacion.getY());
+			}
+			else {
+				moverDerecha = true;
+			}
 		}
 		if (ubicacion.getX() + 30  == obj.getX() && ubicacion.getY() == obj.getY()) {
-			moverIzquierda = true;
+			if (ubicacion.getX() == 0) {
+				ubicacion.setLocation(ubicacion.getX() + 30, ubicacion.getY());
+			}
+			else {
+				moverIzquierda = true;
+			}
 		}
 		if (ubicacion.getY() == obj.getY() + 30 && ubicacion.getX() == obj.getX()) {
-			moverAbajo = true;
+			if (ubicacion.getY() + 30 == maxY) {
+				ubicacion.setLocation(ubicacion.getX(), ubicacion.getY() - 30);
+			}
+			else {
+				moverAbajo = true;
+			}
 		}
 		if (ubicacion.getY() + 30  == obj.getY() && ubicacion.getX() == obj.getX()) {
-			moverArriba = true;
+			if (ubicacion.getY() == 0) {
+				ubicacion.setLocation(ubicacion.getX(), ubicacion.getY() + 30);
+			}
+			else {
+				moverArriba = true;
+			}
 		}
 	}
 	public void verificarMuros() {
@@ -94,7 +114,10 @@ public class Carreta {
 	public void verificarObjs(Point obj) {
 
 		if (ubicacion.getX() + 30 == obj.getX() && ubicacion.getY() == obj.getY()) {
-			moverDerecha = false;
+			if (ubicacion.getX() + 30 == 0) {
+				moverDerecha = false;
+			}
+			
 		}
 		if (ubicacion.getX() - 30 == obj.getX() && ubicacion.getY() == obj.getY()) {
 			moverIzquierda = false;
