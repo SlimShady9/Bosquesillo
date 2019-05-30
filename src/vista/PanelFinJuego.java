@@ -95,10 +95,9 @@ public class PanelFinJuego extends JPanel  implements ActionListener {
 		if (accion == aceptar.getActionCommand()){
 			setVisible(false);
 			f.getpM().setVisible(true);
-
-		
-		
-
+		}
+		if (accion == salir.getActionCommand()) {
+			System.exit(0);
 		}
 	}
 }

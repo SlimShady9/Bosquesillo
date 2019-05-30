@@ -28,7 +28,7 @@ public class PanelMenu extends JPanel implements ActionListener {
 		ImageIcon co = new ImageIcon("Data/configuraciones.png");
 		ImageIcon co1 = new ImageIcon("Data/instrucciones.png");
 		ImageIcon co2 = new ImageIcon("Data/salir.png");
-		logoBienVergas = new JLabel("*~*");
+		logoBienVergas = new JLabel(log);
 		inicio = new JButton("Jugar");
 		configuraciones = new JButton("Configuraciones");
 		instrucciones = new JButton("Instrucciones");

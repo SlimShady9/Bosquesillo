@@ -51,6 +51,8 @@ public class Controlador{
 
 	public void iniciarMeta() {
 		mE = new Meta(dimX, dimY);
+		mE.iniciarPosicion(disponibilidad);	
+		disponibilidad[posicion] = mE.getUbicacion();
 	}
 	public void iniciarCarreta() {
 		carro = new Carreta(dimX, dimY);
@@ -59,14 +61,13 @@ public class Controlador{
 		posicion++;
 	}
 	public void iniciarCheckpoint() {
-		cH = new Checkpoint [ajustes.getcObjetos()];
+		cH = new Checkpoint [ajustes.getcChecks()];
 		for (int i = 0 ; i < cH.length ; i++) {
 			cH[i] = new Checkpoint(dimX, dimY);
 			cH[i].iniciarPosicion(disponibilidad);
 			disponibilidad[posicion]  = cH[i].getUbicacion();
 			posicion++;
 		}
-
 	}
 	public void iniciarMuroDeTrump() {
 		trump = new MuroDeTrump[ajustes.getcObjetos()];
@@ -153,6 +154,19 @@ public class Controlador{
 		}
 		return r;
 	}
+	public JLabel[] asignarCheckpoint(){
+		ImageIcon imagenCheckpoint;
+		int posX, posY ;
+		JLabel[] r = new JLabel[ajustes.getcChecks()];
+		for (int i = 0 ; i < r.length ; i++) {
+			imagenCheckpoint = cH[i].cargarImagen();
+			r[i] = new JLabel(imagenCheckpoint);
+			posX = (int)cH[i].getUbicacion().getX();
+			posY = (int)cH[i].getUbicacion().getY();
+			r[i].setBounds(posX, posY, 30, 30);
+		}
+		return r;
+	}
 	public JLabel[] asignarMonstuoL(){
 		ImageIcon imagenML;
 		int posX, posY;
@@ -179,7 +193,6 @@ public class Controlador{
 		}
 		return r;
 	}	
-
 	public JLabel[][] asignarTablero() {
 		ImageIcon imagenA = t.cargarImagenA();
 		ImageIcon imagenB = t.cargarImagenB();
@@ -200,7 +213,12 @@ public class Controlador{
 		}
 		return casillas;
 	}
-
+	public JLabel asignarMeta () {
+		ImageIcon imagenMeta = mE.cargarImagen();
+		JLabel r = new JLabel(imagenMeta);
+		r.setBounds((int) mE.getUbicacion().getX(), (int) mE.getUbicacion().getY(), 30, 30);
+		return r;
+	}
 
 	public Ajustes getAjustes() {
 		return ajustes;
@@ -261,7 +279,11 @@ public class Controlador{
 		}
 		for (int l = 0 ; l < mL.length ; l++) {
 			carro.verificarObjs(mL[l].getUbicacion());
-
+		}
+		for (int m = 0 ; m < cH.length ; m++) {
+			if (cH[m].verificarObjs(carro.getUbicacion())) {
+				
+			}
 		}
 		carro.actualizar();
 	}

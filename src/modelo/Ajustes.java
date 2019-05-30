@@ -44,6 +44,9 @@ public class Ajustes {
 	public int getcObjetos() {
 		return cObjetos;
 	}
+	public int getcChecks() {
+		return cCheckPoints;
+	}
 	
 
 }

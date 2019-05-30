@@ -35,8 +35,26 @@ public class Checkpoint {
 			}
 		}
 	}
+	public boolean verificarObjs(Point obj) {
+
+		boolean pego = false;
+		if (ubicacion.getX() == obj.getX() && ubicacion.getY() == obj.getY()) {
+			pego = true;
+		}
+		if (ubicacion.getX() == obj.getX() && ubicacion.getY() == obj.getY()) {
+			pego = true;
+		}
+		if (ubicacion.getY() == obj.getY() && ubicacion.getX() == obj.getX()) {
+			pego = true;
+		}
+		if (ubicacion.getY() == obj.getY() && ubicacion.getX() == obj.getX()) {
+			pego = true;
+		}
+		return pego;
+				
+	}
 	public ImageIcon cargarImagen(){
-		imagen = new ImageIcon("Data/Check.png");
+		imagen = new ImageIcon("Data/Check.jpeg");
 		return imagen;
 	}
 

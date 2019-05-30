@@ -37,7 +37,7 @@ public class Meta {
 		}
 	}
 	public ImageIcon cargarImagen(){
-		imagen = new ImageIcon("Data/Meta.png");
+		imagen = new ImageIcon("Data/Meta.jpeg");
 		return imagen;
 	}
 

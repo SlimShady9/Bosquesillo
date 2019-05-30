@@ -11,8 +11,9 @@ import modelo.Ajustes;
 public class PanelPantallaJuego extends JPanel implements KeyListener{
 
 	private JButton botonB;
-	private JLabel carro;
+	private JLabel carro, meta;
 	private JLabel[] mLetal;
+	private JLabel[] checks;
 	private JLabel thor[];
 	private JLabel trump[];
 	private JLabel tablero[][];
@@ -29,13 +30,14 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 
 	}
 
-
 	public void iniciarObjetos() {
 		cargarBosquesillo();
 		cargarCarro();
 		cagarMonstruo();
 		cargarThor();
 		cargarTrump();
+		cargarMeta();
+		cargarChecks();
 		cargarTabla();
 	}
 
@@ -64,6 +66,14 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 		carro = c.asignarCarrito();
 		add(carro);
 	}
+	public void cargarChecks() {
+		checks = new JLabel[c.getAjustes().getcChecks()];
+		JLabel[] eo = c.asignarCheckpoint();
+		for (int i = 0 ; i < checks.length ; i++) {
+			checks[i] = eo[i];
+			add(checks[i]);
+		}
+	}
 
 	public void cagarMonstruo(){
 		mLetal = new JLabel[c.getAjustes().getcObjetos()];
@@ -84,6 +94,10 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 		}
 		validate();
 	}
+	public void cargarMeta() {
+		meta = c.asignarMeta();
+		add(meta);
+	}
 
 	public void actualizarPBosquesillo() {
 		botonB.setLocation(c.getBosque());
@@ -103,12 +117,9 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 		carro.setLocation(c.getCarro());
 	}
 
-
 	public JButton getBotonB() {
 		return botonB;
 	}
-
-
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
@@ -127,9 +138,6 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 				actualizarCarro();
 				actualizarPBosquesillo();
 			}
-
-
-
 		}
 		if (key == KeyEvent.VK_DOWN) {
 			if (c.verificarMuerte()) {
@@ -145,8 +153,6 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 				actualizarCarro();
 				actualizarPBosquesillo();
 			}
-			
-
 		}
 		if (key == KeyEvent.VK_LEFT) {
 			if (c.verificarMuerte()) {
@@ -162,8 +168,6 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 				actualizarCarro();
 				actualizarPBosquesillo();
 			}
-			
-
 		}
 		if (key == KeyEvent.VK_RIGHT) {
 			if (c.verificarMuerte()) {
@@ -179,31 +183,22 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 				actualizarCarro();
 				actualizarPBosquesillo();	
 			}
-			
-
-
 		}
 		if( key ==  KeyEvent.VK_ESCAPE) {
 			setEnabled(false);
 			botonB.setEnabled(false);
 			fr.getEsc().setVisible(true);
 		}
-
 	}
-
 	public JButton getBosquesillo() {
 		return botonB;
 	}
-
-
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
-
-
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub

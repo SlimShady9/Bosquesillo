@@ -39,7 +39,7 @@ public class MonstruoLetal {
 		}
 	}
 	public ImageIcon cargarImagen(){
-		imagen = new ImageIcon("Data/MonstruoLetal.png");
+		imagen = new ImageIcon("Data/Letal.png");
 		return imagen;
 	}
 	public void verificarObjs(Point obj) {
