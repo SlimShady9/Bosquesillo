@@ -1,4 +1,5 @@
 package vista;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JButton;
@@ -116,6 +117,13 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 	public void actualizarCarro() {
 		carro.setLocation(c.getCarro());
 	}
+	public void actualizarChecks() {
+		for (int i = 0 ; i < checks.length ; i++) {
+			if (c.getChecks(i).getX() == -1 && c.getChecks(i).getY() == -1) {
+				checks[i].setVisible(false);
+			}
+		}
+	}
 
 	public JButton getBotonB() {
 		return botonB;
@@ -137,6 +145,7 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 				actualizarPThores();
 				actualizarCarro();
 				actualizarPBosquesillo();
+				actualizarChecks();
 			}
 		}
 		if (key == KeyEvent.VK_DOWN) {
@@ -152,6 +161,7 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 				actualizarPThores();
 				actualizarCarro();
 				actualizarPBosquesillo();
+				actualizarChecks();
 			}
 		}
 		if (key == KeyEvent.VK_LEFT) {
@@ -167,6 +177,7 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 				actualizarPThores();
 				actualizarCarro();
 				actualizarPBosquesillo();
+				actualizarChecks();
 			}
 		}
 		if (key == KeyEvent.VK_RIGHT) {
@@ -181,7 +192,8 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 				actualizarPMLetales();
 				actualizarPThores();
 				actualizarCarro();
-				actualizarPBosquesillo();	
+				actualizarPBosquesillo();
+				actualizarChecks();
 			}
 		}
 		if( key ==  KeyEvent.VK_ESCAPE) {

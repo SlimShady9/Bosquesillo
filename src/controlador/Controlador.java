@@ -238,6 +238,9 @@ public class Controlador{
 	public Point getThor(int indice){
 		return thor[indice].getUbicacion();
 	}
+	public Point getChecks(int indice) {
+		return cH[indice].getUbicacion();
+	}
 
 	public int getDimX() {
 		return dimX;
@@ -282,6 +285,7 @@ public class Controlador{
 		}
 		for (int m = 0 ; m < cH.length ; m++) {
 			if (cH[m].verificarObjs(carro.getUbicacion())) {
+				cH[m].setUbicacion(new Point(-1, -1));
 				
 			}
 		}

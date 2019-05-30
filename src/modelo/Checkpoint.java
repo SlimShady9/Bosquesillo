@@ -62,6 +62,11 @@ public class Checkpoint {
 		return ubicacion;
 	}
 
+	public void setUbicacion(Point ubicacion) {
+		this.ubicacion = ubicacion;
+	}
+	
+
 
 
 }

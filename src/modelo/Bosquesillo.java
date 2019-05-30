@@ -126,7 +126,6 @@ public class Bosquesillo {
 	public void setMoverAbajo(boolean moverAbajo) {
 		this.moverAbajo = moverAbajo;
 	}
-	
 	public void setMoverIzquierda(boolean moverIzquierda) {
 		this.moverIzquierda = moverIzquierda;
 	}
