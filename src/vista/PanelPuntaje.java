@@ -1,5 +1,6 @@
 package vista;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -10,15 +11,15 @@ import controlador.Controlador;
 
 public class PanelPuntaje extends JFrame{
 
-	private JLabel lPuntaje, nPasos, mayorPuntaje;
-	private JLabel puntaje ;
+	private JLabel puntaje, nPasos;
+	private JLabel pasos , score;
 	private JFrameP fr;
 	private Controlador c;
 
 	public PanelPuntaje(JFrameP fr) {
 		this.fr  = fr;
 		c = fr.getControl();
-		setLayout(new GridLayout(3,3));
+		setLayout(new GridLayout(2, 2));
 		setSize(250, 200);
 		setResizable(false);
 		iniciarComponentes();
@@ -26,31 +27,37 @@ public class PanelPuntaje extends JFrame{
 	}
 
 	public void iniciarComponentes() {
-		String score = Integer.toString(c.getPuntaje());
-		lPuntaje = new JLabel("  Puntaje:");
-		puntaje = new JLabel(score);
+		String sPasos = Integer.toString(c.getPasos());
+		String sScore = Integer.toString(c.getScore());
 		nPasos = new JLabel("  Pasos restantes: ");
-		mayorPuntaje = new JLabel ("   El mayor puntaje es:  ");	
+		puntaje = new JLabel ("   Su puntaje es:  ");	
+		pasos = new JLabel(sPasos);
+		score = new JLabel(sScore);
 		add(nPasos);
+		add(pasos);
 		add(puntaje);
-		add(mayorPuntaje);
+		add(score);
+		pasos.setBorder(BorderFactory.createLineBorder(Color.black));
 		puntaje.setBorder(BorderFactory.createLineBorder(Color.black));
-		lPuntaje.setBorder(BorderFactory.createLineBorder(Color.black));
 		nPasos.setBorder(BorderFactory.createLineBorder(Color.black));
-		mayorPuntaje.setBorder(BorderFactory.createLineBorder(Color.black));
+		score.setBorder(BorderFactory.createLineBorder(Color.black));
 	}
-	public JLabel getPuntaje() {
-		return puntaje;
+	public JLabel getPasos() {
+		return pasos;
+	}
+	public JLabel getScore() {
+		return score;
 	}
 
-	public void setPuntaje(JLabel puntaje) {
-		this.puntaje = puntaje;
+	public void setPasos(JLabel pasos) {
+		this.pasos = pasos;
 	}
 
 	public void actiulizar() {
-		String score = Integer.toString(c.getPuntaje());
-		puntaje.setText(score);
-
+		String sPasos = Integer.toString(c.getPasos());
+		String sScore = Integer.toString(c.getScore());
+		pasos.setText(sPasos);
+		score.setText(sScore);
 	}
 
 

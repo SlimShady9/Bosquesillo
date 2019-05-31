@@ -15,6 +15,7 @@ public class JFrameP extends JFrame{
 	private PanelInstrucciones pI;
 	private Esc esc;
 	private PanelPuntaje puntaje;
+	private PanelVictorias vicotria;
 
 	
 	public JFrameP(Controlador co){
@@ -48,6 +49,12 @@ public class JFrameP extends JFrame{
 		esc.setVisible(false);
 		esc.setBounds(100, 100, 400, 300);
 		add(esc);
+		vicotria = new PanelVictorias(this);
+		vicotria.setVisible(false);
+		vicotria.setBounds(100, 100, 400, 300);
+		add(vicotria);
+	}
+	public void iniciarFinJuego() {
 		pF = new PanelFinJuego(this);
 		pF.setBounds(0, 0, 610, 630);
 		pF.setVisible(false);
@@ -102,6 +109,11 @@ public class JFrameP extends JFrame{
 	public Controlador getControl() {
 		return c;
 	}
+
+	public PanelVictorias getVicotria() {
+		return vicotria;
+	}
+	
 	
 	
 }

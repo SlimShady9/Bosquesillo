@@ -134,66 +134,93 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 		int key = arg0.getKeyCode();
 		if (key == KeyEvent.VK_UP) {
 			if (c.verificarMuerte()) {
-
+				fr.iniciarFinJuego();
 				setVisible(false);
 				fr.getpF().setVisible(true);
 			}
 			else {
-				c.moverArriba();
-				fr.getPuntaje().actiulizar();
-				actualizarPMLetales();
-				actualizarPThores();
-				actualizarCarro();
-				actualizarPBosquesillo();
-				actualizarChecks();
+				if (c.ducleVictoria()) {
+					setVisible(false);
+					fr.getVicotria().setVisible(true);
+
+				} else {
+					c.moverArriba();
+					fr.getPuntaje().actiulizar();
+					actualizarPMLetales();
+					actualizarPThores();
+					actualizarCarro();
+					actualizarPBosquesillo();
+					actualizarChecks();
+				}
 			}
 		}
 		if (key == KeyEvent.VK_DOWN) {
 			if (c.verificarMuerte()) {
+				fr.iniciarFinJuego();
 				setVisible(false);
 				fr.getpF().setVisible(true);
 				fr.getPuntaje().setVisible(false);
 			}
 			else {
-				c.moverAbajo();
-				fr.getPuntaje().actiulizar();
-				actualizarPMLetales();
-				actualizarPThores();
-				actualizarCarro();
-				actualizarPBosquesillo();
-				actualizarChecks();
+				if (c.ducleVictoria()) {
+					setVisible(false);
+					fr.getVicotria().setVisible(true);
+
+				} else {
+					c.moverAbajo();
+					fr.getPuntaje().actiulizar();
+					actualizarPMLetales();
+					actualizarPThores();
+					actualizarCarro();
+					actualizarPBosquesillo();
+					actualizarChecks();
+				}
 			}
 		}
 		if (key == KeyEvent.VK_LEFT) {
 			if (c.verificarMuerte()) {
+				fr.iniciarFinJuego();
 				setVisible(false);
 				fr.getpF().setVisible(true);
 				fr.getPuntaje().setVisible(false);
 			}
 			else {
-				c.moverIzquierda();
-				fr.getPuntaje().actiulizar();
-				actualizarPMLetales();
-				actualizarPThores();
-				actualizarCarro();
-				actualizarPBosquesillo();
-				actualizarChecks();
+				if (c.ducleVictoria()) {
+					setVisible(false);
+					fr.getVicotria().setVisible(true);
+
+				} else {
+					c.moverIzquierda();
+					fr.getPuntaje().actiulizar();
+					actualizarPMLetales();
+					actualizarPThores();
+					actualizarCarro();
+					actualizarPBosquesillo();
+					actualizarChecks();
+				}
 			}
 		}
 		if (key == KeyEvent.VK_RIGHT) {
 			if (c.verificarMuerte()) {
+				fr.iniciarFinJuego();
 				fr.getPuntaje().setVisible(false);
 				setVisible(false);
 				fr.getpF().setVisible(true);
 			}
 			else {
-				c.moverDerecha();
-				fr.getPuntaje().actiulizar();
-				actualizarPMLetales();
-				actualizarPThores();
-				actualizarCarro();
-				actualizarPBosquesillo();
-				actualizarChecks();
+				if (c.ducleVictoria()) {
+					setVisible(false);
+					fr.getVicotria().setVisible(true);
+
+				} else {
+					c.moverDerecha();
+					fr.getPuntaje().actiulizar();
+					actualizarPMLetales();
+					actualizarPThores();
+					actualizarCarro();
+					actualizarPBosquesillo();
+					actualizarChecks();
+				}
 			}
 		}
 		if( key ==  KeyEvent.VK_ESCAPE) {
@@ -216,9 +243,4 @@ public class PanelPantallaJuego extends JPanel implements KeyListener{
 		// TODO Auto-generated method stub
 
 	}
-
-
-
-
-
 }

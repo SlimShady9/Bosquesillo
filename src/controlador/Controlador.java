@@ -220,6 +220,22 @@ public class Controlador{
 		return r;
 	}
 
+	public boolean ducleVictoria() {
+		int todos = 0;
+		for (int i = 0 ; i < cH.length ; i++) {
+			if (carro.getUbicacion().equals(mE.getUbicacion())){
+				if (cH[i].getUbicacion().equals(new Point(-1, -1))) {
+					todos++;
+				}
+			}
+		}
+		if (todos == cH.length) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 	public Ajustes getAjustes() {
 		return ajustes;
 	}
@@ -229,6 +245,10 @@ public class Controlador{
 	}
 	public Point getCarro() {
 		return carro.getUbicacion();
+	}
+	
+	public Meta getmE() {
+		return mE;
 	}
 
 	public Point getMLetal(int indice){
@@ -419,7 +439,11 @@ public class Controlador{
 		}
 		return estaMuerto;
 	}
-	public int getPuntaje() {
+	public int getPasos() {
 		return b.getContador();
 	}
+	public int getScore() {
+		return b.getContador() * dimX * dimY/ 100;
+	}
+
 }

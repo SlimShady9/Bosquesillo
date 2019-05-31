@@ -19,15 +19,19 @@ import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.Border;
 
+import controlador.Controlador;
+
 public class PanelFinJuego extends JPanel  implements ActionListener {
 
-	private JLabel Titulo, sc, nCasillasY ;
+	private JLabel Titulo, sc, nCasillasY, score ;
 	private JFrameP f;
 	private JButton volver, aceptar, salir;
 	private int valorx, valory;
+	private Controlador c;
 
 	public PanelFinJuego(JFrameP f){
 		this.f = f;
+		c = f.getControl();
 		valorx = 15;
 		valory = 15;
 		setLayout(null);
@@ -46,16 +50,23 @@ public class PanelFinJuego extends JPanel  implements ActionListener {
 	public void cargarLabels(){
 		Font fuente1 = new Font("Comic Sans MS", Font.ITALIC, 20);
 		Font fuentet = new Font("Comic Sans MS", Font.CENTER_BASELINE, 26);
+		String sScore = Integer.toString(c.getScore());
 		
 		Titulo = new JLabel("LA PODEROSA URSS HA CAIDO :'(");
 		Titulo.setFont(fuentet);
-		Titulo.setBounds(60, 60, 500, 50);
+		Titulo.setBounds(60, 60, 250, 50);
 		add(Titulo);
 
 		sc = new JLabel("SCORE:");
 		sc.setFont(fuente1);
-		sc.setBounds(190, 140, 500, 50);
+		sc.setBounds(190, 140, 250, 50);
 		add(sc);
+		
+		score = new JLabel (sScore);
+		score.setFont(fuente1);
+		score.setBounds(390, 140, 250, 50);
+		add(sc);
+		
 
 		nCasillasY = new JLabel("HIGH SCORE:");
 		nCasillasY.setFont(fuente1);
